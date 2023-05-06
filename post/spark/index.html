@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/hqp1203.github.io\/",
+  "author": {
+    "@type": "Person",
+    "name": "Qinpei Huang",
+    
+    "image": "https://www.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c"
+    
+  },
+  "name":"hqp1203のBlog",
+  "description":"",
+  "url":"https:\/\/hqp1203.github.io\/post\/spark\/",
+  "keywords":"[Spark, development, next-gen]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.111.3 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="Qinpei Huang">
+<meta name="keywords" content="Spark, development, next-gen">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark">
+<meta name="twitter:title" content="Spark">
+<meta property="og:url" content="https://hqp1203.github.io/post/spark/">
+<meta property="twitter:url" content="https://hqp1203.github.io/post/spark/">
+<meta property="og:site_name" content="hqp1203のBlog">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2023-05-06T18:26:06">
+  
+  
+    <meta property="article:modified_time" content="2023-05-06T18:26:06">
+  
+  
+  
+    
+      <meta property="article:section" content="IT">
+    
+      <meta property="article:section" content="大数据处理">
+    
+  
+  
+    
+      <meta property="article:tag" content="Spark">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=640">
+
+
+
+
+
+
+    <title>Spark</title>
+
+    <link rel="icon" href="https://hqp1203.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://hqp1203.github.io/post/spark/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha512-MLcK/YRapzET1qTBXrOiZE6bGBgtATMo2bIyalVJ8EKDEGNoeA3SPQkvWAR0zNS650YG13ocXBMeioDuZcSRuQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://hqp1203.github.io/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+      
+        <link rel="stylesheet"  href="https://hqp1203.github.io/css/mystyle.css">
+      
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="1">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/" aria-label="去首页">hqp1203のBlog</a>
+  </div>
+  
+    
+      <a class="header-right-icon open-algolia-search"
+         href="/#search" aria-label="打开链接: /#search">
+    
+    
+      <i class="fa fa-lg fa-search"></i>
+    
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="1">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about" aria-label="阅读有关作者的更多信息">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Qinpei Huang</h4>
+        
+          <h5 class="sidebar-profile-bio">一个破破烂烂的博客</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/post" title="博客">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">博客</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/21834930/hqp1203" target="_blank" rel="noopener" title="Stack Overflow">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-stack-overflow" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/hqp1203" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="1"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      Spark
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2023-05-06T18:26:06&#43;08:00">
+        
+  
+  
+  
+  
+    6 五月 2023
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="/categories/it">IT</a>, 
+    
+      <a class="category-link" href="/categories/%e5%a4%a7%e6%95%b0%e6%8d%ae%e5%a4%84%e7%90%86">大数据处理</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <h1 id="spark">Spark</h1>
+<ul>
+<li><a href="#chapter1">大数据的 5V 特征</a></li>
+<li><a href="#chapter2">Spark 产生背景</a></li>
+<li><a href="#chapter3">Spark 优点</a></li>
+<li><a href="#chapter4">Spark 应用场景</a></li>
+<li><a href="#chapter5">Spark 生态系统</a></li>
+<li><a href="#chapter6">Spark 基本概念</a></li>
+<li><a href="#chapter7">Spark 应用执行基本过程</a></li>
+</ul>
+<h2 id="大数据的-5v-特征-a-namechapter1a">大数据的 5V 特征 <!-- raw HTML omitted --><!-- raw HTML omitted --></h2>
+<ul>
+<li>Volume（大量）：大数据的体量非常庞大，其数据量往往以亿计或更多，数据的增长速度也非常快，需要更多的存储和处理能力。</li>
+<li>Velocity（高速）：大数据的生成速度很快，很多数据源每秒钟会产生数千甚至数百万条数据。此外，对于实时数据处理，数据的产生和处理速度都需要非常快。</li>
+<li>Variety（多样）：大数据不仅包括结构化数据，还包括半结构化和非结构化数据，如文本、音频、视频、图像等，来源也十分广泛，如社交媒体、移动设备、物联网等。</li>
+<li>Veracity（真实性）：大数据中的数据质量千差万别，需要进行数据清洗和验证，确保数据的准确性和可信度。</li>
+<li>Value（价值）：大数据的价值在于能够从海量数据中发现隐藏的模式和信息，做出更好的决策，并提供更好的产品和服务。</li>
+</ul>
+<h2 id="spark-产生背景a-namechapter2a">Spark 产生背景<!-- raw HTML omitted --><!-- raw HTML omitted --></h2>
+<p><strong>MapReduce存在以下局限性：</strong></p>
+<ul>
+<li>仅支持Map和Reduce。数据处理每一步都需要一个Map和Reduce，而有的数据不需要整套流程</li>
+<li>处理效率低：Map中间结果需要写入磁盘，Reduce的结果需要写入HDFS；任务调度开销大；jvm频繁创建与销毁</li>
+<li>Map和Reduce均需要排序，但是有的任务不需要排序</li>
+<li>不适合做迭代计算，交互式处理、流式处理</li>
+</ul>
+<h2 id="spark-优点a-namechapter3a">Spark 优点<!-- raw HTML omitted --><!-- raw HTML omitted --></h2>
+<p><strong>Spark相较于MapReduce模型有以下优点：</strong></p>
+<ul>
+<li>运行速度快：Spark使用内存计算，相比于MapReduce使用磁盘计算，Spark的速度更快。</li>
+<li>通用性强：Spark除了支持批处理外，还支持实时处理、流处理、机器学习、图计算等各种应用场景，可以满足不同需求的数据处理需求。</li>
+<li>易用性好：API丰富；支持多种编程语言；易于部署</li>
+<li>兼容性好：Spark可以与其他大数据框架集成，使用内置的资源管理器Standalone也可以读取HDFS,HBase等产品中的数据</li>
+</ul>
+<h2 id="spark-应用场景a-namechapter4a">Spark 应用场景<!-- raw HTML omitted --><!-- raw HTML omitted --></h2>
+<ul>
+<li>批处理：Spark可以应用于大规模的离线批处理任务，例如数据清洗、数据分析、机器学习、图形处理等。</li>
+<li>实时处理：Spark可以应用于需要快速处理实时数据流的场景，例如网络日志分析、广告实时竞价、物联网等。</li>
+<li>交互式查询：Spark可以应用于需要快速响应用户查询的场景，例如数据仓库查询、数据可视化、BI分析等。</li>
+<li>流式处理：Spark可以应用于大规模的流式数据处理任务，例如实时计算、实时分析、实时预测等。</li>
+</ul>
+<h2 id="spark-生态系统a-namechapter5a">Spark 生态系统<!-- raw HTML omitted --><!-- raw HTML omitted --></h2>
+<ul>
+<li>Spark Core：Spark的核心组件，提供了分布式计算的基本功能，例如任务调度、内存管理和分布式数据处理等。</li>
+<li>Spark SQL：一个基于Spark的分布式SQL查询引擎，可以将SQL查询和Spark程序结合起来，提供了SQL查询和DataFrame的API。</li>
+<li>Spark Streaming：一个基于Spark的流处理引擎，支持从各种数据源接收流数据，并进行实时计算和分析。</li>
+<li>MLlib：一个基于Spark的机器学习库，提供了各种机器学习算法的实现，例如分类、回归、聚类和推荐等。</li>
+<li>GraphX：一个基于Spark的图形计算库，提供了图形算法的实现，例如社交网络分析、网络流分析和图像处理等。</li>
+<li>SparkR：一个基于R语言的Spark API，提供了R语言的语法和函数接口，使得R语言开发者可以直接使用Spark。</li>
+<li>PySpark：一个基于Python的Spark API，提供了Python的语法和函数接口，使得Python开发者可以直接使用Spark。</li>
+<li>Spark Packages：一个开放的Spark插件库，提供了各种第三方组件和工具，例如Hadoop支持、数据库连接和数据可视化等。</li>
+<li>Databricks：一个基于Spark的云计算平台，提供了Spark的托管服务和可视化工具，使得用户可以轻松地使用Spark进行数据处理和分析。</li>
+</ul>
+<h2 id="spark-基本概念a-namechapter6a">Spark 基本概念<!-- raw HTML omitted --><!-- raw HTML omitted --></h2>
+<ul>
+<li>Spark应用程序：Spark应用程序是使用Spark编写的分布式计算程序，通常由Spark上下文、RDD、转换操作和动作操作等构成。</li>
+<li>Spark Driver：Spark应用程序的主进程，它负责驱动整个应用程序的执行，包括任务的调度和计算的结果收集。</li>
+<li>Spark Job：Spark应用程序执行过程中的基本执行单元，一个Spark Job通常包含一组任务，这些任务可以在一个或多个分区上并行执行。</li>
+<li>Stage：Stage是DAG中的基本执行单元，可以将DAG划分为多个阶段，每个阶段由一组没有shuffle依赖关系的任务组成，通常一个Stage的任务可以并行执行。</li>
+<li>Task: Task是运行在执行器上的工作单元，是单个分区的最小处理流程单元。</li>
+<li>DAG: 反应RDD之间的依赖关系</li>
+<li>Executor: 是应用程序运行在工作节点的一个进程，负责运行任务，返回结果给驱动程序</li>
+<li>TaskScheduler: 将阶段拆分成多个任务提交给工作节点运行，执行器运行的任务是由调度器分配的</li>
+<li>DAGScheduler: 有向无环图可以基于DAG划分阶段，以任务集的形式提交阶段给任务调度器；最重要的任务就是计算作业和任务的依赖关系，指定调度逻辑。</li>
+</ul>
+<h2 id="spark-应用执行基本过程a-namechapter7a">Spark 应用执行基本过程<!-- raw HTML omitted --><!-- raw HTML omitted --></h2>
+<ol>
+<li>创建SparkContext：该对象向资源管理器注册，之后负责和集群资源管理器进行通信，申请资源、任务分配和运行监控等，此外还申请运行执行器进程的资源。</li>
+<li>集群资源管理器根据预先设定的算法在资源池为执行器进程分配合适的运行资源，并启动执行器进程。运行过程中执行器心跳将发送到资源管理器上.</li>
+<li>SparkContext根据RDD之间的依赖关系构建DAG，然后提交给DAG调度器解析，将DAG拆解为多个阶段，并计算各Stage之间的依赖关系，此后交由任务集给任务调度器进行处理。执行器向SparkContext申请任务，任务调度器发放任务给执行器，同时SparkContext将程序代码发放给执行器。</li>
+<li>Task在执行器上运行，反馈执行结果给Task调度器，然后再反馈给DAG调度器。运行完毕后写入数据，SparkContext向集群资源管理器注销并释放所有资源。</li>
+</ol>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/spark/">Spark</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/scala/" data-tooltip="Scala" aria-label="下一篇: Scala">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/first/" data-tooltip="First" aria-label="上一篇: First">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hqp1203.github.io/post/spark/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hqp1203.github.io/post/spark/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hqp1203.github.io/post/spark/" title="分享到 Google&#43;" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#gitalk" aria-label="发表评论">
+        <i class="fa fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <div id="gitalk">
+      <noscript>Please enable JavaScript to view the comments powered by Gitalk.</noscript>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js" integrity="sha512-EcTCcXV46teiNwe0VcnM5A038tcY+BaQYO4nW6Gh2i7v4/HjBVg7xx3+JBLl9WofDds//INJAiEGAtdgr8PWyA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+      (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+          document.getElementById('gitalk').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+          return;
+        }
+        new Gitalk({
+          clientID: 'f4f67b3e56cb58bac59d',
+          clientSecret: 'c3cf576fa67525b248108e18e368c9492c10ed4c',
+          repo: 'hqp1203.github.io',
+          owner: 'hqp1203',
+          admin: ['hqp1203'],
+          id: '3850f052bfeb2f8644762853b69b78eb',
+          ...{"distractionfreemode":false,"enablehotkey":true,"language":"zh-CN","pagerdirection":"first","perpage":10}
+        }).render('gitalk')
+      })()
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2023 Qinpei Huang. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/scala/" data-tooltip="Scala" aria-label="下一篇: Scala">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/first/" data-tooltip="First" aria-label="上一篇: First">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hqp1203.github.io/post/spark/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hqp1203.github.io/post/spark/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hqp1203.github.io/post/spark/" title="分享到 Google&#43;" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#gitalk" aria-label="发表评论">
+        <i class="fa fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="1">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhqp1203.github.io%2Fpost%2Fspark%2F" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fhqp1203.github.io%2Fpost%2Fspark%2F" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fhqp1203.github.io%2Fpost%2Fspark%2F" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=110" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Qinpei Huang</h4>
+    
+      <div id="about-card-bio">一个破破烂烂的博客</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        在校无业大学生
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://hqp1203.github.io/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://hqp1203.github.io/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha256-LVuWfOU0rWFMCJNl1xb3K2HSWfxtK4IPbqEerP1P83M=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha256-putofyQv7OB569xAldpyBnHJ0Uc+7VGp5Us05IgDGss=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/dockerfile.min.js"></script>
+  
+
+  
+    <script src="https://hqp1203.github.io/js/myscript.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+

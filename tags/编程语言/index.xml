@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编程语言 on hqp1203のBlog</title>
+    <link>https://hqp1203.github.io/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
+    <description>Recent content in 编程语言 on hqp1203のBlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 06 May 2023 18:38:57 +0800</lastBuildDate><atom:link href="https://hqp1203.github.io/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scala</title>
+      <link>https://hqp1203.github.io/post/scala/</link>
+      <pubDate>Sat, 06 May 2023 18:38:57 +0800</pubDate>
+      
+      <guid>https://hqp1203.github.io/post/scala/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
