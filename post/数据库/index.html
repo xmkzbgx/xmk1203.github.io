@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/hqp1203.github.io\/",
+  "author": {
+    "@type": "Person",
+    "name": "Qinpei Huang",
+    
+    "image": "https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c"
+    
+  },
+  "name":"hqp1203のBlog",
+  "description":"",
+  "url":"https:\/\/hqp1203.github.io\/post\/%E6%95%B0%E6%8D%AE%E5%BA%93\/",
+  "keywords":"[MySQL, Redis, development, next-gen]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.111.3 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="Qinpei Huang">
+<meta name="keywords" content="MySQL, Redis, development, next-gen">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库">
+<meta name="twitter:title" content="数据库">
+<meta property="og:url" content="https://hqp1203.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+<meta property="twitter:url" content="https://hqp1203.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+<meta property="og:site_name" content="hqp1203のBlog">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2023-05-08T15:42:55">
+  
+  
+    <meta property="article:modified_time" content="2023-05-08T15:42:55">
+  
+  
+  
+    
+      <meta property="article:section" content="IT">
+    
+  
+  
+    
+      <meta property="article:tag" content="DataBase">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=640">
+  <meta property="twitter:image" content="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=640">
+
+
+
+
+
+
+    <title>数据库</title>
+
+    <link rel="icon" href="https://hqp1203.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://hqp1203.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha512-MLcK/YRapzET1qTBXrOiZE6bGBgtATMo2bIyalVJ8EKDEGNoeA3SPQkvWAR0zNS650YG13ocXBMeioDuZcSRuQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://hqp1203.github.io/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+      
+        <link rel="stylesheet"  href="https://hqp1203.github.io/css/mystyle.css">
+      
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="1">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/" aria-label="去首页">hqp1203のBlog</a>
+  </div>
+  
+    
+      <a class="header-right-icon open-algolia-search"
+         href="/#search" aria-label="打开链接: /#search">
+    
+    
+      <i class="fa fa-lg fa-search"></i>
+    
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="1">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about" aria-label="阅读有关作者的更多信息">
+          <img class="sidebar-profile-picture" src="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Qinpei Huang</h4>
+        
+          <h5 class="sidebar-profile-bio">一个破破烂烂的博客</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/post" title="博客">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">博客</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/21834930/hqp1203" target="_blank" rel="noopener" title="Stack Overflow">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-stack-overflow" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/hqp1203" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="1"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      数据库
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2023-05-08T15:42:55&#43;08:00">
+        
+  
+  
+  
+  
+    8 五月 2023
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="/categories/it">IT</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <h2 id="关系型数据库">关系型数据库</h2>
+<p>1、数据事务ACID，以及各自的实现原理</p>
+<pre tabindex="0"><code>ACID是指数据库事务的四个特性，包括原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）和持久性（Durability）。下面分别介绍每个特性的实现原理：
+
+1. 原子性（Atomicity）：指事务是一个不可分割的工作单位，要么全部执行成功，要么全部执行失败。实现原理是使用日志记录技术，将事务的所有操作记录到日志中，如果事务执行失败，则可以使用日志进行回滚，将数据库恢复到事务执行前的状态。
+
+2. 一致性（Consistency）：指事务执行前后，数据库的状态必须保持一致。实现原理是使用约束和触发器来保证数据的一致性。例如，可以使用外键约束来保证关联表的数据一致性，使用触发器来检查数据的有效性和完整性。
+
+3. 隔离性（Isolation）：指多个事务并发执行时，每个事务的操作都不会被其他事务干扰。实现原理是使用锁机制来保证事务的隔离性。例如，可以使用排他锁（Exclusive Lock）来保证事务的原子性，使用共享锁（Shared Lock）来保证事务的并发性。
+
+4. 持久性（Durability）：指事务一旦提交，对数据库的修改就是永久性的，即使发生系统故障也不会丢失。实现原理是使用日志记录技术和缓冲区管理技术。例如，可以使用写前日志（Write Ahead Logging，WAL）技术来保证事务的持久性，使用缓冲区管理技术来提高数据访问的效率。
+
+总之，ACID是数据库事务的四个特性，它们分别是原子性、一致性、隔离性和持久性。这些特性的实现原理包括使用日志记录技术、约束和触发器、锁机制、缓冲区管理技术等。通过实现这些特性，可以保证数据库事务的可靠性和一致性，从而提高数据的安全性和可靠性。
+
+需要注意的是，虽然ACID可以保证数据库事务的可靠性和一致性，但是它也会带来一些性能上的开销。例如，使用锁机制来保证事务的隔离性会导致并发性能下降，使用日志记录技术和缓冲区管理技术会增加系统的开销。因此，在实现数据库事务时，需要权衡ACID特性和性能之间的关系，选择合适的实现方式。
+
+此外，需要注意的是，ACID只适用于关系型数据库（RDBMS），对于NoSQL数据库，它们通常采用不同的事务模型，如BASE（Basically Available, Soft state, Eventually consistent）模型。BASE模型强调的是可用性、柔性状态和最终一致性，与ACID模型的强一致性有所不同。因此，在选择数据库时，需要根据具体的需求和应用场景来选择合适的数据库和事务模型。
+
+总之，ACID是数据库事务的四个特性，它们分别是原子性、一致性、隔离性和持久性。这些特性的实现原理包括使用日志记录技术、约束和触发器、锁机制、缓冲区管理技术等。通过实现这些特性，可以保证数据库事务的可靠性和一致性，从而提高数据的安全性和可靠性。在实现数据库事务时，需要权衡ACID特性和性能之间的关系，选择合适的实现方式。同时，需要注意ACID只适用于关系型数据库，对于NoSQL数据库，需要采用不同的事务模型，如BASE模型。
+</code></pre><p>2、MySQL中数据的一致性
+3、MySQL的默认隔离级别，分别解决了什么问题</p>
+<pre tabindex="0"><code>MySQL支持四种隔离级别，分别是：
+
+1. 读未提交（READ UNCOMMITTED）：最低的隔离级别，允许一个事务读取另一个事务未提交的数据，可能会出现脏读、不可重复读和幻读问题。
+
+2. 读已提交（READ COMMITTED）：允许一个事务读取另一个事务已提交的数据，解决了脏读问题，但可能会出现不可重复读和幻读问题。
+
+3. 可重复读（REPEATABLE READ）：MySQL的默认隔离级别，保证一个事务多次读取同一数据时，读取到的数据是一致的，解决了脏读和不可重复读问题，但可能会出现幻读问题。
+
+4. 序列化（SERIALIZABLE）：最高的隔离级别，强制事务串行执行，避免了所有并发问题，包括脏读、不可重复读和幻读，但是会影响并发性能。
+
+需要注意的是，隔离级别越高，事务的并发性能越差，因为高隔离级别需要更多的锁机制来保证数据的一致性，会导致更多的锁等待和死锁问题。因此，在选择隔离级别时需要根据业务需求和性能要求进行权衡。
+</code></pre><p>4、详细描述MVCC</p>
+<pre tabindex="0"><code>MVCC（Multi-Version Concurrency Control）是一种多版本并发控制机制，用于解决数据库并发访问时的读写冲突问题。MVCC机制通过为每个事务分配一个唯一的事务ID，将每个事务的操作视为一个版本，并在每个版本中保存数据的快照，从而实现并发访问时的数据隔离。
+
+在MVCC机制中，每个数据行都有一个版本号，事务读取数据时，只能读取版本号小于等于事务ID的数据行，这样可以保证读取到的数据是在事务开始时存在的数据快照。当事务修改数据时，会生成一个新的版本号，并将修改后的数据保存到新的版本中，同时保留原来的版本，这样其他事务仍然可以读取到原来的数据版本。
+
+MVCC机制的实现需要数据库支持多版本存储和读取，同时需要在事务提交或回滚时，清理无用的版本，以避免数据的过多存储和影响性能。在MySQL中，MVCC机制主要通过以下两个机制实现：
+
+1. Undo Log：用于保存事务修改前的数据快照，当事务回滚时，可以使用Undo Log将数据恢复到修改前的状态。
+
+2. Read View：用于保存事务开始时的数据版本号和事务ID，当事务读取数据时，会根据Read View来确定读取的数据版本。
+
+MVCC机制可以提高数据库的并发性能，避免了锁竞争和死锁问题，同时也保证了数据的一致性和隔离性。但是，MVCC机制也会带来一些问题，比如增加了存储空间的占用，可能导致数据的不一致性和幻读问题等。因此，在使用MVCC机制时需要根据具体情况进行权衡和调整。
+
+在MySQL中，MVCC机制主要用于支持可重复读隔离级别，通过为每个事务分配一个唯一的事务ID和保存数据的快照来实现数据的隔离。在可重复读隔离级别下，事务可以多次读取同一数据，读取到的数据是一致的，不会出现不可重复读和脏读问题，但是可能会出现幻读问题。为了解决幻读问题，MySQL提供了Next-Key Locking机制，通过在索引上加锁来避免幻读问题的发生。
+
+总之，MVCC机制是一种重要的并发控制机制，可以提高数据库的并发性能和数据隔离性，但是需要根据具体情况进行权衡和调整，以达到最优的性能和数据一致性。
+</code></pre><p>5、B树和B+树</p>
+<pre tabindex="0"><code>B树和B+树都是常用的数据结构，用于实现数据库索引。它们的主要区别在于叶子节点的结构和存储方式。
+
+B树是一种平衡树结构，每个节点可以存储多个关键字和对应的指针，用于快速查找和访问数据。B树的每个节点都可以作为叶子节点，因此可以直接存储数据，而不需要像B+树一样将数据存储在叶子节点中。B树的查找性能比较高，但是由于每个节点都可以作为叶子节点，因此需要进行频繁的磁盘读写，导致性能较低。
+
+B+树是在B树的基础上进行了优化，将数据全部存储在叶子节点中，非叶子节点只存储关键字和对应的指针，用于快速定位到叶子节点。B+树的叶子节点之间使用指针连接，形成一个有序的链表，可以快速进行范围查询和排序操作。B+树的查找性能比B树更高，因为B+树只需要进行一次磁盘读取就可以获取到所有的数据，而B树需要进行多次磁盘读取。
+
+B+树相对于B树的优点在于：
+
+1. 减少了磁盘读写次数，提高了查询性能。
+
+2. 叶子节点之间使用指针连接，可以快速进行范围查询和排序操作。
+
+3. 叶子节点只存储数据，非叶子节点只存储关键字和指针，可以减少内存占用和磁盘空间占用。
+
+在实际应用中，B+树是一种常用的索引结构，被广泛应用于数据库系统中。MySQL就是使用B+树来实现索引的，包括主键索引、唯一索引和普通索引等。B+树的优化和扩展也有很多，比如B*树、T树、R树等，都是在B+树的基础上进行了优化和改进，以适应不同的应用场景和需求。
+
+总之，B树和B+树都是常用的数据结构，用于实现数据库索引。B树适用于随机访问，B+树适用于范围查询和排序操作。在实际应用中，需要根据具体情况选择合适的索引结构，以达到最优的性能和效果。
+</code></pre><p>6、SQL的执行过程、MySQL的内部机制，解析器优化器的实现原理</p>
+<pre tabindex="0"><code>SQL的执行过程可以分为三个阶段：解析阶段、优化阶段和执行阶段。
+
+1.  解析阶段：将SQL语句解析成语法树，检查语法和语义的正确性，生成内部数据结构。
+    
+2.  优化阶段：对内部数据结构进行优化，包括查询重写、查询优化和执行计划生成等。
+    
+3.  执行阶段：根据执行计划执行SQL语句，包括数据读取、数据过滤、数据聚合和数据排序等操作。
+
+MySQL的内部机制包括存储引擎、查询处理器和连接器等组件。存储引擎负责数据的存储和读取，包括InnoDB、MyISAM、Memory等多种存储引擎。查询处理器负责SQL的解析、优化和执行，包括解析器、优化器和执行器等组件。连接器负责与客户端的连接和认证，包括连接管理和权限控制等。
+
+MySQL的解析器和优化器是SQL执行过程中的核心组件，它们的实现原理主要包括以下几个方面：
+
+1. 解析器：将SQL语句解析成语法树，检查语法和语义的正确性，生成内部数据结构。解析器的实现主要包括词法分析和语法分析两个阶段。词法分析将SQL语句分解成一个个的词法单元，语法分析将词法单元组合成语法树。MySQL的解析器使用了YACC和Bison等工具来实现。
+
+2. 优化器：对内部数据结构进行优化，包括查询重写、查询优化和执行计划生成等。优化器的实现主要包括代价估算、查询重写、查询优化和执行计划生成等阶段。代价估算是指通过统计信息和查询特征来估算不同执行计划的代价，从而选择最优的执行计划。查询重写是指将原始查询转换成等价的查询，以便优化器更好地处理。查询优化是指根据代价估算和查询重写结果，选择最优的执行计划。执行计划生成是指将优化器选择的执行计划转换成具体的操作序列，包括数据读取、数据过滤、数据聚合和数据排序等操作。
+
+MySQL的优化器使用了基于成本的优化器（Cost-Based Optimizer），通过代价估算和查询优化来选择最优的执行计划。MySQL的优化器还支持多种优化技术，包括索引选择、连接顺序优化、子查询优化、常量表达式优化等。
+
+总之，MySQL的内部机制包括存储引擎、查询处理器和连接器等组件，其中查询处理器包括解析器、优化器和执行器等组件。解析器将SQL语句解析成语法树，检查语法和语义的正确性，生成内部数据结构。优化器对内部数据结构进行优化，包括查询重写、查询优化和执行计划生成等。执行器根据执行计划执行SQL语句，包括数据读取、数据过滤、数据聚合和数据排序等操作。MySQL的优化器使用了基于成本的优化器，通过代价估算和查询优化来选择最优的执行计划，同时支持多种优化技术，以提高查询性能和效率。
+</code></pre><p>7、索引的种类、为什么索引可以加速搜索速度</p>
+<pre tabindex="0"><code>MySQL支持多种索引类型，包括：
+
+1. B树索引：MySQL的默认索引类型，适用于等值查询和范围查询，可以加速数据的查找和访问。
+
+2. B+树索引：与B树索引类似，但是将数据全部存储在叶子节点中，非叶子节点只存储关键字和对应的指针，适用于范围查询和排序操作。
+
+3. 哈希索引：使用哈希算法来快速定位数据，适用于等值查询，但是不支持范围查询和排序操作。
+
+4. 全文索引：用于全文搜索，支持关键字的分词和匹配，适用于文本数据的查询和分析。
+
+索引可以加速搜索速度的原因主要有两个方面：
+
+1. 索引可以减少数据的扫描次数，从而提高查询效率。通过索引，数据库可以快速定位到符合条件的数据行，而不需要扫描整个数据表。特别是在大型数据表中，索引可以大大减少数据扫描的时间和成本，提高查询效率。
+
+2. 索引可以减少磁盘I/O操作，从而提高查询效率。通过索引，数据库可以直接定位到磁盘上的数据页，而不需要进行全盘扫描，减少了磁盘I/O操作的次数和成本，提高了查询效率。
+
+需要注意的是，索引也会带来一些问题，包括索引的维护成本、索引的空间占用和索引的更新代价等。因此，在使用索引时需要根据具体情况进行权衡和调整，以达到最优的性能和效果。
+</code></pre><p>8、索引查询需要注意的问题、遵循的原则、建立索引的场景</p>
+<pre tabindex="0"><code>索引查询需要注意的问题：
+
+1. 索引的选择：选择合适的索引类型和字段，避免使用过多的索引。
+
+2. 查询条件的优化：尽量使用索引覆盖查询，避免使用函数、运算符等操作。
+
+3. 查询语句的优化：避免使用子查询、联合查询等复杂语句，尽量简化查询语句。
+
+遵循的原则：
+
+1. 尽量使用覆盖索引查询，避免全表扫描。
+
+2. 尽量使用单列索引，避免使用多列索引。
+
+3. 尽量使用前缀索引，避免使用全文索引。
+
+4. 尽量使用等值查询，避免使用范围查询。
+
+建立索引的场景：
+
+1. 经常用于查询的字段。
+
+2. 经常用于排序、分组的字段。
+
+3. 经常用于连接查询
+</code></pre><p>9、索引是否越多越好</p>
+<pre tabindex="0"><code>不是的，索引并不是越多越好。建立索引会增加数据库的存储空间和维护成本，同时也会影响数据的插入、更新和删除操作的性能。因此，建立索引需要根据具体的业务需求和查询场景进行选择和优化。
+
+建立过多的索引会导致以下问题：
+
+1. 增加存储空间：每个索引都需要占用一定的存储空间，过多的索引会占用大量的存储空间。
+
+2. 影响写入性能：每次插入、更新或删除数据时，都需要更新索引，过多的索引会增加写入操作的时间。
+
+3. 影响查询性能：查询时需要遍历索引，过多的索引会增加查询操作的时间。
+
+因此，建立索引需要根据查询频率和查询条件进行选择，避免建立过多的索引。一般来说，建议按照以下原则来建立索引：
+
+1. 建立主键索引：每个表都应该有一个主键索引，用于唯一标识每条记录。
+
+2. 建立唯一索引：对于需要保证唯一性的字段，可以建立唯一索引。
+
+3. 建立频繁查询的索引：对于经常用于查询的字段，可以建立索引，以提高查询性能。
+
+4. 避免建立重复索引：如果多个索引包含相同的字段，可以考虑删除其中一个索引。
+
+5. 避免建立过长的索引：索引字段长度过长会增加索引的存储空间和查询时间，应该尽量避免。
+
+总之，建立索引需要根据具体的业务需求和查询场景进行选择和优化，避免建立过多或不必要的索引，以提高数据库的性能和稳定性。在建立索引时，需要考虑以下几个方面：
+
+1. 查询频率：对于经常用于查询的字段，可以建立索引，以提高查询性能。
+
+2. 数据量：对于大数据量的表，建立索引可以提高查询效率，但也会增加存储空间和维护成本。
+
+3. 数据更新频率：对于经常进行数据更新的表，建立过多的索引会影响写入性能，应该尽量避免。
+
+4. 查询条件：建立索引需要根据查询条件进行选择，避免建立不必要的索引。
+
+5. 确定索引类型：根据查询条件和数据类型，选择合适的索引类型，如B树索引、哈希索引、全文索引等。
+
+总之，建立索引需要根据具体的业务需求和查询场景进行选择和优化，避免建立过多或不必要的索引，以提高数据库的性能和稳定性。同时，也需要定期对索引进行优化和维护，包括删除不必要的索引、重建损坏的索引、优化索引的存储结构等。
+</code></pre><p>10、主从数据库如何实现数据同步</p>
+<pre tabindex="0"><code>主从数据库的数据同步可以通过以下几种方式实现：
+
+1. 基于二进制日志复制：主数据库将所有的数据更改操作记录在二进制日志中，从数据库通过读取主数据库的二进制日志来获取数据更改信息，然后将这些更改操作应用到自己的数据库中，从而实现数据同步。
+
+2. 基于GTID复制：GTID是全局事务标识符，可以用来标识主从数据库之间的数据同步关系。主数据库在进行数据更改时，会生成一个唯一的GTID，从数据库通过读取主数据库的GTID来获取数据更改信息，然后将这些更改操作应用到自己的数据库中，从而实现数据同步。
+
+3. 基于逻辑复制：逻辑复制是指将主数据库的数据更改操作转换成SQL语句，然后将这些SQL语句传输到从数据库中执行，从而实现数据同步。逻辑复制可以通过多种方式实现，如基于触发器、基于存储过程、基于日志等。
+
+4. 基于半同步复制：半同步复制是指主数据库在进行数据更改时，必须等待至少一个从数据库确认收到数据更改信息后才能继续进行下一步操作，从而保证数据的一致性和可靠性。
+
+需要注意的是，主从数据库的数据同步过程中，可能会出现网络延迟、主从数据库配置不一致、数据冲突等问题，因此需要进行定期的监控和维护，以保证数据同步的稳定性和可靠性。同时，也需要根据具体的业务需求和数据量大小来选择合适的数据同步方式和配置方案。
+</code></pre><h2 id="非关系型数据库">非关系型数据库</h2>
+<p>1、Redis的基本数据结构以及使用场景</p>
+<pre tabindex="0"><code>Redis支持多种数据结构，包括：
+
+1. 字符串（string）：存储字符串、整数或浮点数等类型的数据，常用于缓存、计数器、分布式锁等场景。
+
+2. 列表（list）：存储有序的字符串列表，支持从两端插入和删除元素，常用于消息队列、任务队列等场景。
+
+3. 集合（set）：存储无序的字符串集合，支持集合运算（交集、并集、差集等），常用于去重、标签等场景。
+
+4. 哈希（hash）：存储键值对的无序集合，支持单个键值对的读写操作，常用于存储对象、配置信息等场景。
+
+5. 有序集合（sorted set）：存储有序的字符串集合，每个元素都有一个分数，支持按照分数排序、范围查询等操作，常用于排行榜、计数器等场景。
+</code></pre><p>2、Hash的底层结构</p>
+<pre tabindex="0"><code>Redis中的Hash是一种键值对的数据结构，底层实现是一个哈希表（hash table）。哈希表是一种用于快速查找的数据结构，它将键映射到值，通过哈希函数将键转换成哈希值，然后将哈希值作为索引，将值存储在对应的位置上。
+
+在Redis中，每个Hash对象都包含一个哈希表，哈希表由一个数组和多个链表组成。数组中的每个元素称为桶（bucket），每个桶可以存储多个键值对，如果多个键映射到同一个桶，就会形成一个链表，链表中的每个节点都是一个键值对。
+
+当需要查询或修改一个键值对时，Redis会先根据键计算出哈希值，然后根据哈希值找到对应的桶，最后在桶中查找对应的键值对。如果多个键映射到同一个桶，就需要遍历链表，直到找到对应的键值对。
+
+为了保证哈希表的性能和空间利用率，Redis会根据哈希表的负载因子（load factor）来动态调整哈希表的大小。当哈希表中的键值对数量超过了负载因子和桶的数量的乘积时，Redis会自动扩容哈希表，重新分配桶的数量，并将所有的键值对重新散列到新的桶中。这个过程可能会导致哈希表的性能下降，因此需要根据实际情况来设置负载因子和桶的数量，以避免频繁的扩容和性能问题。
+
+总之，Redis中的Hash底层结构是一个哈希表，它通过哈希函数将键映射到桶的索引，然后在桶中查找对应的键值对。哈希表具有快速查找的特点，适用于存储键值对数量较大、随机访问较频繁的场景。在使用Hash时，需要注意避免哈希冲突和负载因子过高等问题，以保证哈希表的性能和稳定性。
+</code></pre><p>3、dict扩容缩容的原理</p>
+<pre tabindex="0"><code>在Redis中，dict是一个基于哈希表实现的字典结构，用于存储键值对。dict的底层实现是一个哈希表，由多个桶组成，每个桶可以存储多个键值对。当dict中的键值对数量超过了负载因子和桶的数量的乘积时，Redis会自动扩容dict，重新分配桶的数量，并将所有的键值对重新散列到新的桶中。这个过程可能会导致dict的性能下降，因此需要根据实际情况来设置负载因子和桶的数量，以避免频繁的扩容和性能问题。
+
+dict的扩容过程分为两个阶段：预分配和渐进式rehash。
+
+1. 预分配阶段：在扩容开始时，Redis会根据当前dict中的键值对数量和负载因子计算出新的桶的数量，并分配新的桶数组。此时，新的桶数组中的所有桶都是空的，但是dict中的键值对仍然存储在旧的桶数组中。
+
+2. 渐进式rehash阶段：在预分配阶段完成后，Redis会逐步将旧的桶数组中的键值对重新散列到新的桶数组中。具体来说，Redis会每次从旧的桶数组中取出一个桶，然后将桶中的所有键值对重新散列到新的桶数组中。这个过程可能会持续一段时间，直到所有的键值对都被重新散列到新的桶数组中为止。在这个过程中，dict仍然可以正常使用，但是由于键值对的散列位置发生了变化，可能会导致查询性能下降。
+
+dict的缩容过程比较简单，当dict中的键值对数量减少到一定程度时，Redis会自动缩小dict的大小，以节省内存空间。具体来说，Redis会将dict中的桶数量减半，并将所有的键值对重新散列到新的桶中。缩容过程不会影响dict的查询性能，因为键值对的散列位置没有发生变化。
+
+需要注意的是，dict的扩容和缩容过程都需要重新散列键值对，因此可能会导致dict的性能下降。为了避免这个问题，可以在dict中存储大量的键值对时，预先设置合适的桶数量和负载因子，以减少扩容和缩容的频率。同时，也可以通过Redis的命令info来查看dict的状态，包括键值对数量、桶数量、负载因子等信息，以便进行性能优化和调整。
+</code></pre><p>4、Redis的持久化方案以及对应使用场景</p>
+<pre tabindex="0"><code>Redis提供了两种持久化方案：RDB和AOF。
+
+1. RDB持久化
+
+RDB持久化是将Redis在内存中的数据定期写入磁盘中，形成一个快照。RDB持久化的优点是备份数据快速，且对Redis的性能影响较小。RDB持久化适用于数据量较大，但是对数据实时性要求不高的场景，如数据备份、灾备等。
+
+2. AOF持久化
+
+AOF持久化是将Redis的所有写操作记录下来，以文本的形式保存在磁盘中。AOF持久化的优点是数据实时性高，可以保证数据不丢失。AOF持久化适用于对数据实时性要求较高的场景，如在线支付、实时计算等。
+
+综上所述，RDB持久化适用于对数据实时性要求不高，但是需要备份数据的场景；AOF持久化适用于对数据实时性要求较高，需要保证数据不丢失的场景。在实际应用中，可以根据具体业务需求选择合适的持久化方案或者结合使用两种持久化方案，以达到更好的数据保护和性能优化效果。
+</code></pre><p>5、Redis数据库如何实现数据同步</p>
+<pre tabindex="0"><code>Redis主从数据库的数据同步是通过Redis的复制机制来实现的。主数据库将自己的数据变化记录在内存中，同时将这些变化以命令的形式发送给从数据库，从数据库接收到命令后执行相应的操作，从而保证主从数据库的数据一致性。
+
+具体的实现步骤如下：
+
+1. 从数据库连接主数据库，并发送SYNC命令，请求进行全量同步。
+
+2. 主数据库接收到SYNC命令后，将自己的数据快照发送给从数据库。
+
+3. 从数据库接收到快照后，将其加载到自己的内存中，并开始接收主数据库发送的命令。
+
+4. 主数据库将自己的数据变化以命令的形式发送给从数据库，从数据库接收到命令后执行相应的操作。
+
+5. 从数据库定期向主数据库发送PING命令，以检测主数据库是否可用。
+
+6.如果主数据库出现故障或者网络中断，从数据库会尝试重新连接主数据库，并请求进行增量同步。增量同步是指从数据库请求主数据库发送自上次同步以来的数据变化命令，以保证数据的最终一致性。
+
+需要注意的是，Redis的主从复制机制是异步的，即主数据库不会等待从数据库执行命令的结果，而是直接返回结果给客户端。因此，在主从复制过程中，可能会出现主从数据不一致的情况。为了避免这种情况的发生，可以通过设置Redis的复制偏移量和复制积压缓冲区来保证数据的一致性。
+</code></pre><p>6、如何搭建Redis集群</p>
+<pre tabindex="0"><code>Redis集群是通过将多个Redis实例组合在一起来实现高可用和负载均衡的。搭建Redis集群需要以下步骤：
+
+1. 安装Redis
+
+首先需要在每个节点上安装Redis，并确保Redis的版本大于等于3.0。
+
+2. 配置Redis
+
+在每个节点上，需要修改Redis的配置文件，以启用集群模式。具体的配置项包括：
+
+- cluster-enabled yes：启用集群模式。
+
+- cluster-config-file nodes.conf：指定集群配置文件的路径。
+
+- cluster-node-timeout 15000：指定节点超时时间，单位为毫秒。
+
+3. 创建集群
+
+在任意一个节点上，使用redis-cli工具创建集群。具体的命令为：
+
+redis-cli --cluster create node1:port1 node2:port2 node3:port3 ...
+
+其中，node1、node2、node3等为节点的IP地址或主机名，port1、port2、port3等为节点的端口号。创建集群时，需要指定至少3个节点，每个节点的端口号不能重复。
+
+4. 添加节点
+
+在集群运行过程中，可以随时添加新的节点。具体的步骤为：
+
+- 在新节点上安装Redis，并修改配置文件，启用集群模式。
+
+- 在任意一个节点上，使用redis-cli工具添加新节点。具体的命令为：
+
+redis-cli --cluster add-node new_node:port existing_node:port
+
+其中，new_node为新节点的IP地址或主机名，port为新节点的端口号，existing_node为已有节点的IP地址或主机名，port为已有节点的端口号。
+
+- 在新节点上，使用redis-cli工具进行数据迁移。具体的命令为：
+
+
+redis-cli --cluster reshard new_node:port
+
+
+5. 删除节点
+
+在集群运行过程中，也可以随时删除节点。具体的步骤为：
+
+- 在任意一个节点上，使用redis-cli工具删除节点。具体的命令为：
+
+redis-cli --cluster del-node node:port
+
+其中，node为要删除的节点的IP地址或主机名，port为要删除的节点的端口号。
+
+- 在集群中，会自动将该节点上的数据迁移到其他节点上。
+
+需要注意的是，Redis集群的数据分片是通过哈希槽来实现的。每个节点都会负责一部分哈希槽，当需要存储数据时，Redis会根据键的哈希值将数据存储到相应的哈希槽中。因此，在添加或删除节点时，需要重新分配哈希槽，以保证数据的均衡分布。
+
+综上所述，搭建Redis集群需要安装Redis、配置Redis、创建集群、添加节点和删除节点等步骤。在实际应用中，还需要考虑集群的容错性、负载均衡和监控等问题，以保证集群的稳定性和可靠性。
+</code></pre><p>7、Redis与Memcache的比较及其各自使用场景</p>
+<pre tabindex="0"><code>Redis和Memcache都是内存缓存数据库，但是它们在功能和使用场景上有所不同。
+
+1. 功能比较
+
+Redis相比于Memcache，具有更多的功能，如支持持久化、支持多种数据结构、支持事务等。Redis还提供了更多的命令和功能，如发布/订阅、Lua脚本、分布式锁等。同时，Redis的性能也比Memcache更好。
+
+2. 使用场景比较
+
+由于Redis具有更多的功能，因此在一些需要更多功能的场景下，Redis更适合使用。例如：
+
+- 需要支持更多的数据结构：Redis支持多种数据结构，如字符串、哈希、列表、集合、有序集合等，而Memcache只支持键值对。
+
+- 需要支持持久化：Redis支持RDB和AOF两种持久化方式，可以将数据保存到磁盘中，以防止数据丢失。而Memcache不支持持久化。
+
+- 需要支持事务：Redis支持事务，可以将多个命令打包成一个事务进行提交或回滚。而Memcache不支持事务。
+
+- 需要支持分布式锁：Redis提供了分布式锁的功能，可以通过SETNX命令实现。而Memcache不支持分布式锁。
+
+- 需要支持发布/订阅：Redis提供了发布/订阅的功能，可以实现消息的发布和订阅。而Memcache不支持发布/订阅。
+
+而在一些简单的缓存场景下，Memcache可能更适合使用。例如：
+
+- 只需要简单的键值对缓存：Memcache只支持键值对，可以满足简单的缓存需求。
+
+- 需要更高的性能：虽然Redis的性能比Memcache更好，但是在一些极端情况下，Memcache可能会比Redis更快。例如，当需要缓存大量的小数据时，Memcache的性能可能会更好。
+
+综上所述，Redis和Memcache各有优缺点，需要根据具体的业务需求来选择合适的缓存数据库。如果需要更多的功能和更好的灵活性，可以选择Redis；如果只需要简单的键值对缓存，并且需要更高的性能，可以选择Memcache。
+</code></pre>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/database/">DataBase</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-tooltip="操作系统" aria-label="上一篇: 操作系统">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hqp1203.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hqp1203.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hqp1203.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="分享到 Google&#43;" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#gitalk" aria-label="发表评论">
+        <i class="fa fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <div id="gitalk">
+      <noscript>Please enable JavaScript to view the comments powered by Gitalk.</noscript>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js" integrity="sha512-EcTCcXV46teiNwe0VcnM5A038tcY+BaQYO4nW6Gh2i7v4/HjBVg7xx3+JBLl9WofDds//INJAiEGAtdgr8PWyA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+      (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+          document.getElementById('gitalk').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+          return;
+        }
+        new Gitalk({
+          clientID: 'f4f67b3e56cb58bac59d',
+          clientSecret: 'c3cf576fa67525b248108e18e368c9492c10ed4c',
+          repo: 'hqp1203.github.io',
+          owner: 'hqp1203',
+          admin: ['hqp1203'],
+          id: '9584460aa15cfe0e93f67f8bb4f46c41',
+          ...{"distractionfreemode":false,"enablehotkey":true,"language":"zh-CN","pagerdirection":"first","perpage":10}
+        }).render('gitalk')
+      })()
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2023 Qinpei Huang. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-tooltip="操作系统" aria-label="上一篇: 操作系统">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hqp1203.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hqp1203.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hqp1203.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="分享到 Google&#43;" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#gitalk" aria-label="发表评论">
+        <i class="fa fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="1">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhqp1203.github.io%2Fpost%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%2F" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fhqp1203.github.io%2Fpost%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%2F" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fhqp1203.github.io%2Fpost%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593%2F" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Qinpei Huang</h4>
+    
+      <div id="about-card-bio">一个破破烂烂的博客</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        在校无业大学生
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://hqp1203.github.io/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://hqp1203.github.io/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha256-LVuWfOU0rWFMCJNl1xb3K2HSWfxtK4IPbqEerP1P83M=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha256-putofyQv7OB569xAldpyBnHJ0Uc+7VGp5Us05IgDGss=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/dockerfile.min.js"></script>
+  
+
+  
+    <script src="https://hqp1203.github.io/js/myscript.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+

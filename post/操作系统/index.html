@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/hqp1203.github.io\/",
+  "author": {
+    "@type": "Person",
+    "name": "Qinpei Huang",
+    
+    "image": "https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c"
+    
+  },
+  "name":"hqp1203のBlog",
+  "description":"",
+  "url":"https:\/\/hqp1203.github.io\/post\/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F\/",
+  "keywords":"[Thread, development, next-gen]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.111.3 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="Qinpei Huang">
+<meta name="keywords" content="Thread, development, next-gen">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统">
+<meta name="twitter:title" content="操作系统">
+<meta property="og:url" content="https://hqp1203.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+<meta property="twitter:url" content="https://hqp1203.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+<meta property="og:site_name" content="hqp1203のBlog">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2023-05-08T15:41:53">
+  
+  
+    <meta property="article:modified_time" content="2023-05-08T15:41:53">
+  
+  
+  
+    
+      <meta property="article:section" content="IT">
+    
+  
+  
+    
+      <meta property="article:tag" content="Operation System">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=640">
+  <meta property="twitter:image" content="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=640">
+
+
+
+
+
+
+    <title>操作系统</title>
+
+    <link rel="icon" href="https://hqp1203.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://hqp1203.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha512-MLcK/YRapzET1qTBXrOiZE6bGBgtATMo2bIyalVJ8EKDEGNoeA3SPQkvWAR0zNS650YG13ocXBMeioDuZcSRuQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://hqp1203.github.io/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+      
+        <link rel="stylesheet"  href="https://hqp1203.github.io/css/mystyle.css">
+      
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="1">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/" aria-label="去首页">hqp1203のBlog</a>
+  </div>
+  
+    
+      <a class="header-right-icon open-algolia-search"
+         href="/#search" aria-label="打开链接: /#search">
+    
+    
+      <i class="fa fa-lg fa-search"></i>
+    
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="1">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about" aria-label="阅读有关作者的更多信息">
+          <img class="sidebar-profile-picture" src="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Qinpei Huang</h4>
+        
+          <h5 class="sidebar-profile-bio">一个破破烂烂的博客</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/post" title="博客">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">博客</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/21834930/hqp1203" target="_blank" rel="noopener" title="Stack Overflow">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-stack-overflow" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/hqp1203" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="1"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      操作系统
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2023-05-08T15:41:53&#43;08:00">
+        
+  
+  
+  
+  
+    8 五月 2023
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="/categories/it">IT</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <p>1、OSI/ISO七层模型和TCP/IP五层模型</p>
+<pre tabindex="0"><code>OSI/ISO七层模型：
+
+1. 物理层（Physical Layer）：负责传输比特流，即0和1的电信号，以及定义物理连接和传输介质等。
+
+2. 数据链路层（Data Link Layer）：负责将比特流组成帧，进行差错控制、流量控制、访问控制等。
+
+3. 网络层（Network Layer）：负责将帧转换为数据包，进行路由选择、拥塞控制、分组传输等。
+
+4. 传输层（Transport Layer）：负责将数据包转换为数据段，进行可靠传输、流量控制、错误恢复等。
+
+5. 会话层（Session Layer）：负责建立、管理和终止会话，进行同步、检查点等。
+
+6. 表示层（Presentation Layer）：负责数据格式转换、加密解密、压缩解压缩等，使数据在不同系统之间能够正确地解释和处理。
+
+7. 应用层（Application Layer）：负责提供各种应用服务，如电子邮件、文件传输、远程登录等。
+
+TCP/IP五层模型：
+
+1. 物理层（Physical Layer）：同OSI/ISO七层模型。
+
+2. 数据链路层（Data Link Layer）：同OSI/ISO七层模型。
+
+3. 网络层（Network Layer）：同OSI/ISO七层模型的网络层。
+
+4. 传输层（Transport Layer）：同OSI/ISO七层模型的传输层。
+
+5. 应用层（Application Layer）：将OSI/ISO七层模型的会话层、表示层和应用层合并为一个层次，负责提供各种应用服务。
+
+在OSI/ISO七层模型和TCP/IP五层模型中，前三层模型中的物理设备包括：
+
+1. 物理层（Physical Layer）：传输介质（如光纤、双绞线、同轴电缆、无线电波等）、传输设备（如中继器、集线器、网桥等）。
+
+2. 数据链路层（Data Link Layer）：网卡、交换机、网桥等。
+
+3. 网络层（Network Layer）：路由器、三层交换机等。
+
+这些物理设备在计算机网络中起到了连接和传输数据的作用。其中，传输介质是数据传输的物理通道，传输设备是对传输介质进行信号放大、转换和重构的设备，网卡是计算机与网络之间的接口，交换机和网桥是用于连接多个网络的设备，路由器是用于连接不同网络的设备，三层交换机则结合了交换机和路由器的功能，可以实现局域网内的高速数据交换和不同网络之间的数据转发。这些物理设备的作用不同，但它们共同构成了计算机网络的基础设施，为数据的传输和通信提供了支持。
+</code></pre><p>2、从输入URL到显示网页的整个过程</p>
+<pre tabindex="0"><code>从输入URL到显示网页的整个过程可以分为以下几个步骤：
+
+1. DNS解析：浏览器首先会将输入的URL发送给DNS服务器，DNS服务器会将域名解析为IP地址，以便浏览器能够找到对应的服务器。
+
+2. 建立TCP连接：浏览器向服务器发送TCP连接请求，服务器接受请求并建立TCP连接。
+
+3. 发送HTTP请求：浏览器向服务器发送HTTP请求，请求中包含了请求的资源、请求方式、请求头等信息。
+
+4. 服务器处理请求：服务器接收到请求后，会根据请求的资源和请求方式进行处理，并返回相应的HTTP响应。
+
+5. 接收HTTP响应：浏览器接收到服务器返回的HTTP响应，响应中包含了状态码、响应头、响应体等信息。
+
+6. 解析HTML文件：浏览器解析HTML文件，构建DOM树和CSSOM树，生成渲染树。
+
+7. 布局和绘制：浏览器根据渲染树进行布局和绘制，将页面内容呈现出来。
+
+8. 加载资源：在解析HTML文件的过程中，如果遇到外部资源（如图片、CSS文件、JavaScript文件等），浏览器会向服务器发送请求，下载这些资源并进行处理。
+
+9. 执行JavaScript代码：如果HTML文件中包含了JavaScript代码，浏览器会执行这些代码，对页面进行动态操作和交互。
+
+10. 渲染完成：当所有资源都加载完成，JavaScript代码也执行完毕后，页面渲染完成，用户可以看到完整的网页内容。
+
+总的来说，从输入URL到显示网页的整个过程涉及了多个步骤，包括DNS解析、建立TCP连接、发送HTTP请求、服务器处理请求、接收HTTP响应、解析HTML文件、布局和绘制、加载资源、执行JavaScript代码等。这些步骤都需要浏览器和服务器之间的通信和协作，才能最终将网页内容呈现给用户。同时，不同的浏览器和服务器可能会有不同的实现方式和优化策略，因此在实际应用中，需要对这些细节进行深入了解和优化，以提高网页的性能和用户体验。
+</code></pre><p>3、DNS的解析流程</p>
+<pre tabindex="0"><code>DNS的解析流程如下：
+
+1. 浏览器向本地DNS服务器发送域名解析请求。
+
+2. 如果本地DNS服务器缓存了该域名的IP地址，则直接返回IP地址给浏览器，解析结束。
+
+3. 如果本地DNS服务器没有缓存该域名的IP地址，则向根DNS服务器发送请求。
+
+4. 根DNS服务器返回顶级域名服务器的地址给本地DNS服务器。
+
+5. 本地DNS服务器向顶级域名服务器发送请求。
+
+6. 顶级域名服务器返回二级域名服务器的地址给本地DNS服务器。
+
+7. 本地DNS服务器向二级域名服务器发送请求。
+
+8. 二级域名服务器返回主机名对应的IP地址给本地DNS服务器。
+
+9. 本地DNS服务器将IP地址返回给浏览器。
+
+10. 浏览器向该IP地址发送HTTP请求，获取网页内容。
+
+在DNS解析的过程中，本地DNS服务器会根据域名的层次结构，逐级向上查询，直到找到对应的IP地址。如果在某一级别上找不到对应的IP地址，则会继续向上查询，直到查询到根DNS服务器。根DNS服务器是全球DNS系统的最高层，它不直接提供域名解析服务，而是将请求转发给下一级DNS服务器。顶级域名服务器负责管理顶级域名（如.com、.org、.net等），二级域名服务器则负责管理具体的域名（如google.com、baidu.com等）。在DNS解析的过程中，本地DNS服务器会缓存已经解析过的域名和IP地址，以提高解析速度和减轻DNS服务器的负担。
+</code></pre><p>4、ICMP属于五层协议中的哪一层</p>
+<pre tabindex="0"><code>ICMP（Internet控制消息协议）是TCP/IP协议族中的一个协议，它并不属于TCP/IP五层模型中的任何一层，而是作为网络层（即TCP/IP五层模型中的第三层）的一个附属协议存在。ICMP协议主要用于在IP网络中传递控制信息和错误消息，如网络不可达、主机不可达、超时等。它可以帮助网络管理员快速诊断和解决网络故障，提高网络的可靠性和稳定性。虽然ICMP不属于TCP/IP五层模型中的任何一层，但它在网络通信中扮演着重要的角色，是TCP/IP协议族中不可或缺的一部分。
+</code></pre><p>5、TCP的三次握手、四次挥手</p>
+<pre tabindex="0"><code>TCP是一种面向连接的协议，它在数据传输之前需要建立连接。建立连接的过程需要进行三次握手，而断开连接则需要进行四次挥手。
+
+三次握手：
+
+1.客户端向服务器发送SYN包，表示请求建立连接。
+
+2.服务器收到SYN包后，向客户端发送SYN+ACK包，表示确认客户端的请求，并请求建立连接。
+
+3.客户端收到SYN+ACK包后，向服务器发送ACK包，表示确认服务器的请求，并建立连接。
+
+四次挥手：
+
+1.客户端向服务器发送FIN包，表示要断开连接。
+
+2.服务器收到FIN包后，向客户端发送ACK包，表示确认收到客户端的请求。
+
+3.服务器向客户端发送FIN包，表示服务器也要断开连接。
+
+4.客户端收到FIN包后，向服务器发送ACK包，表示确认收到服务器的请求，并断开连接。
+
+三次握手的目的是确保客户端和服务器之间的通信能够正常进行，避免因为网络延迟或其他原因导致的连接失败。具体来说，三次握手的过程如下：
+
+1. 客户端向服务器发送SYN包，其中SYN表示同步序列号，用于建立连接。客户端随机生成一个初始序列号（ISN）并将其放入SYN包中，同时将SYN标志位置为1，表示这是一个建立连接的请求。
+
+2. 服务器收到SYN包后，会向客户端发送SYN+ACK包，其中ACK表示确认序列号，用于确认客户端的请求。服务器也会随机生成一个初始序列号，并将其放入SYN+ACK包中，同时将SYN和ACK标志位置为1，表示这是一个确认请求并请求建立连接的响应。
+
+3. 客户端收到SYN+ACK包后，会向服务器发送ACK包，其中ACK表示确认序列号，用于确认服务器的请求并建立连接。客户端会将服务器发送的初始序列号加1后放入ACK包中，同时将ACK标志位置为1，表示这是一个确认请求。
+
+通过三次握手，客户端和服务器之间的连接就建立起来了。客户端和服务器都知道对方的初始序列号，可以开始进行数据传输。
+
+四次挥手的目的是断开连接，避免因为连接一直保持而浪费资源。具体来说，四次挥手的过程如下：
+
+1. 客户端向服务器发送FIN包，其中FIN表示结束序列号，用于请求断开连接。客户端不再发送数据，但仍然可以接收服务器发送的数据。
+
+2. 服务器收到FIN包后，会向客户端发送ACK包，表示确认收到客户端的请求。服务器仍然可以发送数据，但不再接收客户端发送的数据。
+
+3. 当服务器不再需要发送数据时，会向客户端发送FIN包，表示服务器也要断开连接。服务器将最后一个发送的数据的序列号放入FIN包中。
+
+4.  客户端收到FIN包后，会向服务器发送ACK包，表示确认收到服务器的请求，并断开连接。客户端将最后一个接收的数据的序列号加1后放入ACK包中。
+
+通过四次挥手，客户端和服务器之间的连接就断开了。需要注意的是，在第三步和第四步之间，服务器可能还会发送一些数据，这些数据可能会被客户端接收到。因此，客户端在收到FIN包后，需要等待一段时间，直到确认服务器不再发送数据
+</code></pre><p>6、为什么说TCP是可靠的</p>
+<pre tabindex="0"><code>TCP是一种可靠的传输协议，因为它具有以下特点：
+
+1. 确认机制：TCP在传输数据时，每发送一个数据包都会等待对方的确认，确保数据包已经被正确接收。如果没有收到确认，TCP会重新发送数据包，直到收到确认为止。
+
+2. 数据校验：TCP在传输数据时，会对数据进行校验，确保数据的完整性和正确性。如果数据包在传输过程中出现错误，TCP会要求对方重新发送数据包。
+
+3. 流量控制：TCP会根据接收方的处理能力和网络状况，控制发送方的数据传输速度，避免数据包的丢失和拥塞。
+
+4. 拥塞控制：TCP会根据网络状况和拥塞程度，调整数据传输速度，避免网络拥塞和数据包的丢失。TCP会根据网络的拥塞情况，动态调整发送数据包的速度和数量，避免网络拥塞和数据包的丢失。
+
+5. 有序传输：TCP会对数据包进行编号，确保数据包按照正确的顺序传输，避免数据包乱序和丢失。
+
+综上所述，TCP具有确认机制、数据校验、流量控制、拥塞控制和有序传输等特点，保证了数据的可靠传输。因此，TCP被广泛应用于互联网上的数据传输，如网页浏览、电子邮件、文件传输等。
+</code></pre><p>7、TCP和UDP的区别</p>
+<pre tabindex="0"><code>TCP和UDP是两种不同的传输协议，它们之间的主要区别如下：
+
+1. 连接方式：TCP是面向连接的协议，需要在通信双方建立连接后才能进行数据传输，而UDP是无连接的协议，不需要建立连接就可以直接进行数据传输。
+
+2. 可靠性：TCP是一种可靠的传输协议，能够保证数据的可靠传输，而UDP是一种不可靠的传输协议，不能保证数据的可靠传输。
+
+3. 数据包大小：TCP传输的数据包大小是有限制的，一般不超过64KB，而UDP传输的数据包大小没有限制，可以达到几MB甚至几十MB。
+
+4. 传输速度：TCP传输速度相对较慢，因为需要进行确认、校验和重传等操作，而UDP传输速度相对较快，因为不需要进行确认和重传等操作。
+
+5. 适用场景：TCP适用于对数据可靠性要求较高的应用场景，如文件传输、电子邮件、网页浏览等；而UDP适用于对实时性要求较高的应用场景，如音视频传输、游戏等。
+
+6. 流量控制和拥塞控制：TCP具有流量控制和拥塞控制机制，可以根据网络状况和接收方处理能力动态调整传输速度，避免网络拥塞和数据包丢失；而UDP没有流量控制和拥塞控制机制，容易导致网络拥塞和数据包丢失。
+
+综上所述，TCP和UDP各有优缺点，适用于不同的应用场景。需要根据具体的应用需求选择
+</code></pre><p>8、TCP的拥塞控制</p>
+<pre tabindex="0"><code>TCP的拥塞控制是一种流量控制机制，用于避免网络拥塞和数据包丢失。TCP的拥塞控制主要包括以下几个方面：
+
+1. 慢启动：在TCP连接建立时，发送方会先发送少量数据包，然后逐渐增加发送数据包的数量，直到网络出现拥塞为止。这个过程称为慢启动。
+
+2. 拥塞避免：在慢启动过程中，当网络出现拥塞时，TCP会减少发送数据包的数量，避免继续加重网络拥塞。在拥塞避免阶段，TCP会根据网络状况动态调整发送数据包的数量和速度，避免网络拥塞和数据包丢失。
+
+3. 拥塞恢复：当TCP检测到网络出现拥塞时，会进入拥塞恢复阶段。在这个阶段，TCP会将拥塞窗口减半，然后重新开始慢启动过程，逐渐增加发送数据包的数量。
+
+4. 快重传和快恢复：当TCP接收到重复的确认信息时，说明有数据包丢失，TCP会立即重传丢失的数据包，并将拥塞窗口减半。在快恢复阶段，TCP会将拥塞窗口增加1，而不是重新开始慢启动过程。
+
+TCP的拥塞控制机制可以有效避免网络拥塞和数据包丢失，保证数据的可靠传输。但是，过于保守的拥塞控制机制也会导致传输速度过慢，影响应用性能。因此，在实际应用中，需要根据具体的网络环境和应用需求，合理调整拥塞控制参数，以达到最优的传输效果。
+
+TCP的拥塞控制机制主要涉及以下几个参数：
+
+1. 拥塞窗口：拥塞窗口是TCP发送方可以发送的数据包数量。在慢启动和拥塞避免阶段，拥塞窗口会逐渐增加，直到网络出现拥塞为止。在拥塞恢复阶段，拥塞窗口会减半。
+
+2. 拥塞阈值：拥塞阈值是TCP发送方在慢启动和拥塞避免阶段，当拥塞窗口达到拥塞阈值时，就会进入拥塞恢复阶段。拥塞阈值的初始值通常为网络的最大带宽除以2，然后根据网络状况动态调整。
+
+3. 超时重传时间：当TCP发送方发送数据包后，如果在一定时间内没有收到确认信息，就会认为数据包丢失，然后重新发送数据包。超时重传时间是指TCP发送方等待确认信息的时间，通常根据网络延迟和丢包率动态调整。
+
+4. 拥塞窗口减半的方式：当TCP检测到网络出现拥塞时，会将拥塞窗口减半。拥塞窗口减半的方式有两种：一种是将拥塞窗口直接减半，另一种是将拥塞窗口设置为拥塞阈值的一半。
+
+5. 快重传和快恢复的阈值：当TCP接收到重复的确认信息时，说明有数据包丢失，TCP会立即重传丢失的数据包，并将拥塞窗口减半。在快恢复阶段，TCP会将拥塞窗口增加1，而不是重新开始慢启动过程。快重传和快恢复的阈值通常为3，表示当接收到3个重复的确认信息时，就进行快重传和快恢复操作。
+
+在实际应用中，需要根据网络状况和应用需求，合理调整拥塞控制参数，以达到最优的传输效果。例如，在高延迟的网络环境中，可以适当增加超时重传时间，以避免过多的重传操作；在对实时性要求较高的应用场景中，可以适当减小拥塞窗口，以提高传输速度。
+</code></pre><p>9、TCP的半连接以及防护措施</p>
+<pre tabindex="0"><code>TCP的半连接指的是TCP连接的三次握手过程中，客户端发送SYN报文后，服务器端没有回复SYN+ACK报文，而是直接关闭连接。这种情况下，客户端会一直等待服务器端的回复，导致资源浪费和服务不可用。
+
+TCP半连接的原因可能是服务器端遭受了SYN Flood攻击，攻击者发送大量的SYN报文，占用服务器端的资源，导致服务器端无法回复SYN+ACK报文，从而导致TCP半连接。
+
+为了防止TCP半连接攻击，可以采取以下措施：
+
+1. 增加SYN队列长度：可以通过增加服务器端的SYN队列长度，来缓解SYN Flood攻击带来的影响。但是，这种方法会增加服务器端的资源消耗，可能导致其他服务的不可用。
+
+2.SYN Cookie技术：SYN Cookie技术是一种防止SYN Flood攻击的技术，它可以在服务器端生成一个加密的cookie，将cookie发送给客户端。当客户端发送ACK报文时，服务器端可以根据cookie验证客户端的合法性，从而避免SYN Flood攻击。
+
+3. 过滤非法IP地址：可以通过过滤非法的IP地址，来防止SYN Flood攻击。例如，可以使用防火墙或入侵检测系统，过滤掉来自非法IP地址的流量。
+
+4. 使用负载均衡器：可以使用负载均衡器来分散流量，避免单个服务器端遭受SYN Flood攻击。负载均衡器可以将流量分发到多个服务器端，从而提高系统的可用性和抗攻击能力。
+
+综上所述，TCP半连接攻击是一种常见的网络攻击，可以通过增加SYN队列长度、使用SYN Cookie技术、过滤非法IP地址和使用负载均衡器等措施来防止。需要根据具体的网络环境和应用需求，选择合适的防护措施，以提高系统的可用性和安全性。
+</code></pre><p>10、证书信任链CA</p>
+<pre tabindex="0"><code>证书信任链（Certificate Authority，CA）是一种数字证书颁发机构，用于验证数字证书的合法性和真实性。在数字证书颁发过程中，CA会对证书申请者进行身份验证，然后颁发数字证书，证明证书申请者的身份和公钥。当客户端访问服务器时，会验证服务器的数字证书是否由受信任的CA颁发，以确保服务器的合法性和真实性。
+
+证书信任链的作用是保证数字证书的真实性和可信度。在数字证书颁发过程中，CA会对证书申请者进行身份验证，确保证书申请者的身份和公钥的真实性。当客户端访问服务器时，会验证服务器的数字证书是否由受信任的CA颁发，以确保服务器的合法性和真实性。如果数字证书不是由受信任的CA颁发，或者数字证书已经过期或被吊销，客户端会提示证书不受信任，从而保护用户的安全和隐私。
+
+在实际应用中，数字证书的信任链是由多个CA组成的。当客户端验证数字证书时，会逐级向上验证证书的合法性和真实性，直到找到受信任的CA为止。例如，当客户端访问某个网站时，会验证网站的数字证书是否由受信任的CA颁发，如果是，则认为网站是合法的，可以建立安全的通信连接。
+
+需要注意的是，虽然数字证书可以保证通信的安全性和真实性，但是数字证书本身也可能存在被篡改或伪造的风险。因此，在使用数字证书时，需要注意保护私钥的安全性，避免私钥泄露或被盗用。同时，需要定期更新数字证书，以保证数字证书的有效性和可信度。
+
+另外，数字证书的信任链也可能存在漏洞和风险。例如，如果某个受信任的CA被攻击或被恶意利用，就可能导致整个数字证书信任链的不可信。为了避免这种情况的发生，需要定期审查数字证书信任链，及时发现和处理潜在的风险和漏洞。
+
+总之，证书信任链是保证数字证书真实性和可信度的重要机制，可以有效避免中间人攻击和其他安全威胁。在使用数字证书时，需要注意保护私钥的安全性，定期更新数字证书，审查数字证书信任链，以提高系统的安全性和可靠性。同时，需要选择受信任的CA颁发数字证书，避免使用不受信任的数字证书，从而保护用户的安全和隐私。
+
+在实际应用中，数字证书信任链的建立和维护需要多方合作和协调。例如，数字证书的颁发和验证需要CA、浏览器厂商、操作系统厂商等多方参与。为了保证数字证书的可信度和安全性，需要建立完善的数字证书管理机制，加强数字证书的监管和审计，及时发现和处理数字证书的风险和漏洞，提高数字证书的安全性和可靠性。
+</code></pre><p>11、HTTP的缓存机制</p>
+<pre tabindex="0"><code>HTTP的缓存机制是通过在客户端和服务器之间存储资源的副本来提高性能和减少网络流量。以下是HTTP缓存机制的几个方面：
+
+1. 缓存控制头：HTTP响应头中的缓存控制头指示客户端和代理服务器如何缓存响应。常见的缓存控制头包括Cache-Control和Expires。
+
+2. Cache-Control：Cache-Control头指示客户端和代理服务器如何缓存响应。常见的Cache-Control指令包括max-age、no-cache、no-store、must-revalidate等。
+
+3. Expires：Expires头指示响应的到期时间，即在此时间之前，客户端和代理服务器可以使用缓存的响应。
+
+4. ETag：ETag头是一个标识符，用于标识资源的版本。客户端和代理服务器可以使用ETag来验证缓存的响应是否仍然有效。如果资源的ETag与客户端或代理服务器缓存中的ETag不匹配，那么客户端或代理服务器必须向服务器请求新的资源。
+
+5. Last-Modified：Last-Modified头指示资源的最后修改时间。客户端和代理服务器可以使用Last-Modified来验证缓存的响应是否仍然有效。如果资源的Last-Modified时间早于客户端或代理服务器缓存中的时间，那么客户端或代理服务器必须向服务器请求新的资源。
+
+6. Conditional Requests：客户端和代理服务器可以使用条件请求来验证缓存的响应是否仍然有效。条件请求包括If-Modified-Since和If-None-Match头，它们分别使用资源的Last-Modified时间和ETag来验证缓存的响应是否仍然有效。
+
+通过使用这些机制，HTTP缓存可以显著提高性能和减少网络流量，从而提高用户体验和降低服务器负载。客户端和代理服务器可以缓存响应，以便在后续的请求中重用它们，而不必再次请求服务器。这可以减少网络延迟和带宽使用，并提高页面加载速度。
+
+但是，HTTP缓存也可能导致问题。如果缓存的响应已过期或不再有效，客户端或代理服务器必须向服务器请求新的资源。如果服务器上的资源已更改，但客户端或代理服务器仍然使用缓存的响应，则可能会导致不一致的数据或错误的结果。
+
+因此，在使用HTTP缓存时，需要仔细考虑缓存策略和缓存控制头，以确保缓存的响应始终是最新的和正确的。
+</code></pre><p>12、HTTP支持的方法</p>
+<pre tabindex="0"><code>HTTP支持的方法（也称为HTTP动词）是指客户端可以使用的HTTP请求类型。以下是HTTP支持的方法：
+
+1. GET：用于请求指定的资源。
+
+2. POST：用于向指定的资源提交数据，通常用于提交表单或上传文件。
+
+3. PUT：用于向指定的资源上传新的内容。
+
+4. DELETE：用于请求删除指定的资源。
+
+5. HEAD：与GET方法类似，但是只返回响应头，而不返回响应体。
+
+6. OPTIONS：用于请求服务器支持的HTTP方法列表。
+
+7. CONNECT：用于建立与目标资源的双向连接，通常用于HTTPS隧道。
+
+8. TRACE：用于请求服务器返回收到的请求，用于测试或诊断。
+
+除了这些常见的HTTP方法，还有一些不常用的方法，如PATCH、PROPFIND、PROPPATCH、MKCOL、COPY、MOVE、LOCK和UNLOCK等。
+
+需要注意的是，不是所有的HTTP服务器都支持所有的HTTP方法。一些服务器可能只支持GET和POST方法，而不支持其他方法。因此，在使用HTTP方法时，需要根据服务器的支持情况来选择合适的方法。
+
+此外，HTTP方法也可以扩展，通过定义新的方法来实现特定的功能。但是，这些扩展方法可能不被所有的HTTP客户端和服务器支持，因此需要谨慎使用。
+
+总之，HTTP支持的方法提供了一种灵活的方式来处理不同类型的请求和响应。根据需要选择合适的方法，可以实现更高效和更安全的通信。
+</code></pre><p>13、HTTP和HTTPS</p>
+<pre tabindex="0"><code>HTTP（Hypertext Transfer Protocol）和HTTPS（Hypertext Transfer Protocol Secure）都是用于在Web浏览器和Web服务器之间传输数据的协议。它们之间的主要区别在于安全性。
+
+HTTP是一种明文协议，所有传输的数据都是明文的，包括用户的敏感信息，如用户名、密码等。这意味着，如果攻击者能够截获HTTP传输的数据，他们可以轻松地读取和窃取这些敏感信息。因此，HTTP不适合传输敏感信息，如信用卡号、社会安全号码等。
+
+HTTPS是一种加密协议，它使用SSL（Secure Sockets Layer）或TLS（Transport Layer Security）协议来加密HTTP传输的数据。这意味着，即使攻击者能够截获HTTPS传输的数据，他们也无法读取或窃取这些数据，因为数据已经被加密。HTTPS可以保护用户的敏感信息，如用户名、密码、信用卡号等。
+
+除了安全性之外，HTTP和HTTPS之间还有其他区别。HTTPS需要使用数字证书来验证Web服务器的身份，以确保用户连接的是正确的服务器。而HTTP没有这个过程，因此可能存在中间人攻击的风险。
+
+另外，HTTPS的加密过程会增加一些额外的开销，如计算和传输加密数据。因此，HTTPS的性能可能会比HTTP略低，尤其是在处理大量请求时。
+
+总之，HTTP和HTTPS都是用于在Web浏览器和Web服务器之间传输数据的协议。HTTPS提供了更高的安全性，适合传输敏感信息，而HTTP则更适合传输一些不敏感的信息。在选择使用哪种协议时，需要根据具体的需求和安全要求来决定。如果需要保护用户的敏感信息，如登录凭证、支付信息等，那么应该使用HTTPS。如果只是传输一些不敏感的信息，如新闻、博客等，那么HTTP就足够了。
+
+另外，需要注意的是，虽然HTTPS可以提供更高的安全性，但它并不是绝对安全的。攻击者仍然可以使用一些技术手段来破解HTTPS加密，如中间人攻击、SSL剥离攻击等。因此，在使用HTTPS时，还需要采取其他措施来增强安全性，如使用强密码、定期更换证书、使用双因素认证等。
+
+总之，HTTP和HTTPS都是Web传输协议，它们之间的主要区别在于安全性。选择使用哪种协议需要根据具体的需求和安全要求来决定。如果需要传输敏感信息，如登录凭证、支付信息等，那么应该使用HTTPS来保护数据的安全性。如果只是传输一些不敏感的信息，如新闻、博客等，那么HTTP就足够了。
+
+此外，需要注意的是，HTTPS不仅可以保护数据的安全性，还可以保护数据的完整性和身份验证。HTTPS使用数字证书来验证Web服务器的身份，以确保用户连接的是正确的服务器。同时，HTTPS还可以防止数据被篡改，因为数据在传输过程中被加密，攻击者无法修改数据而不被检测到。
+
+总之，HTTP和HTTPS之间的区别在于安全性和性能。选择使用哪种协议需要根据具体的需求和安全要求来决定。如果需要保护数据的安全性、完整性和身份验证，那么应该使用HTTPS。如果只是传输一些不敏感的信息，那么HTTP就足够了。在使用HTTPS时，还需要注意一些安全问题，如证书的有效性、加密算法的安全性、中间人攻击等。同时，HTTPS的性能可能会比HTTP略低，因此需要权衡安全性和性能之间的关系，选择合适的协议。
+
+需要注意的是，现在越来越多的网站都开始使用HTTPS来保护用户的隐私和安全。例如，许多电子商务网站、社交媒体网站、在线银行等都使用HTTPS来保护用户的敏感信息。因此，作为Web开发人员，了解HTTP和HTTPS的区别，以及如何使用它们来保护用户的隐私和安全，是非常重要的。
+</code></pre><p>14、TCP/IP五层模型中每一层的典型协议有哪些</p>
+<pre tabindex="0"><code>在TCP/IP五层模型中，每层的典型协议如下：
+
+1. 物理层（Physical Layer）：IEEE 802.3（以太网）、IEEE 802.11（Wi-Fi）、RS-232（串口）等。
+
+2. 数据链路层（Data Link Layer）：ARP（地址解析协议）、RARP（反向地址解析协议）、PPP（点对点协议）、SLIP（串行线路IP协议）等。
+
+3. 网络层（Network Layer）：IP（Internet协议）、ICMP（Internet控制消息协议）、IGMP（Internet组管理协议）等。
+
+4. 传输层（Transport Layer）：TCP（传输控制协议）、UDP（用户数据报协议）等。
+
+5. 应用层（Application Layer）：HTTP（超文本传输协议）、FTP（文件传输协议）、SMTP（简单邮件传输协议）、DNS（域名系统）
+</code></pre>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/operation-system/">Operation System</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/%E6%95%B0%E6%8D%AE%E5%BA%93/" data-tooltip="数据库" aria-label="下一篇: 数据库">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" data-tooltip="计算机网络" aria-label="上一篇: 计算机网络">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hqp1203.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hqp1203.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hqp1203.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="分享到 Google&#43;" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#gitalk" aria-label="发表评论">
+        <i class="fa fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <div id="gitalk">
+      <noscript>Please enable JavaScript to view the comments powered by Gitalk.</noscript>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js" integrity="sha512-EcTCcXV46teiNwe0VcnM5A038tcY+BaQYO4nW6Gh2i7v4/HjBVg7xx3+JBLl9WofDds//INJAiEGAtdgr8PWyA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+      (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+          document.getElementById('gitalk').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+          return;
+        }
+        new Gitalk({
+          clientID: 'f4f67b3e56cb58bac59d',
+          clientSecret: 'c3cf576fa67525b248108e18e368c9492c10ed4c',
+          repo: 'hqp1203.github.io',
+          owner: 'hqp1203',
+          admin: ['hqp1203'],
+          id: 'f435f4e49b4c54ee66590cbfbd02862e',
+          ...{"distractionfreemode":false,"enablehotkey":true,"language":"zh-CN","pagerdirection":"first","perpage":10}
+        }).render('gitalk')
+      })()
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2023 Qinpei Huang. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/%E6%95%B0%E6%8D%AE%E5%BA%93/" data-tooltip="数据库" aria-label="下一篇: 数据库">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" data-tooltip="计算机网络" aria-label="上一篇: 计算机网络">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hqp1203.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hqp1203.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hqp1203.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="分享到 Google&#43;" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#gitalk" aria-label="发表评论">
+        <i class="fa fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="1">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhqp1203.github.io%2Fpost%2F%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F%2F" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fhqp1203.github.io%2Fpost%2F%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F%2F" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fhqp1203.github.io%2Fpost%2F%25E6%2593%258D%25E4%25BD%259C%25E7%25B3%25BB%25E7%25BB%259F%2F" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Qinpei Huang</h4>
+    
+      <div id="about-card-bio">一个破破烂烂的博客</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        在校无业大学生
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://hqp1203.github.io/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://hqp1203.github.io/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha256-LVuWfOU0rWFMCJNl1xb3K2HSWfxtK4IPbqEerP1P83M=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha256-putofyQv7OB569xAldpyBnHJ0Uc+7VGp5Us05IgDGss=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/dockerfile.min.js"></script>
+  
+
+  
+    <script src="https://hqp1203.github.io/js/myscript.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+

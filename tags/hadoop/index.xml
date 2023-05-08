@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hadoop on hqp1203のBlog</title>
+    <link>https://hqp1203.github.io/tags/hadoop/</link>
+    <description>Recent content in Hadoop on hqp1203のBlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 08 May 2023 15:37:19 +0800</lastBuildDate><atom:link href="https://hqp1203.github.io/tags/hadoop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hadoop</title>
+      <link>https://hqp1203.github.io/post/hadoop/</link>
+      <pubDate>Mon, 08 May 2023 15:37:19 +0800</pubDate>
+      
+      <guid>https://hqp1203.github.io/post/hadoop/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

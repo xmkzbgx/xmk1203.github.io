@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/hqp1203.github.io\/",
+  "author": {
+    "@type": "Person",
+    "name": "Qinpei Huang",
+    
+    "image": "https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c"
+    
+  },
+  "name":"hqp1203のBlog",
+  "description":"",
+  "url":"https:\/\/hqp1203.github.io\/post\/hadoop\/",
+  "keywords":"[Hadoop, development, next-gen]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.111.3 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="Qinpei Huang">
+<meta name="keywords" content="Hadoop, development, next-gen">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop">
+<meta name="twitter:title" content="Hadoop">
+<meta property="og:url" content="https://hqp1203.github.io/post/hadoop/">
+<meta property="twitter:url" content="https://hqp1203.github.io/post/hadoop/">
+<meta property="og:site_name" content="hqp1203のBlog">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2023-05-08T15:37:19">
+  
+  
+    <meta property="article:modified_time" content="2023-05-08T15:37:19">
+  
+  
+  
+    
+      <meta property="article:section" content="IT">
+    
+      <meta property="article:section" content="BigData">
+    
+  
+  
+    
+      <meta property="article:tag" content="Hadoop">
+    
+      <meta property="article:tag" content="ZooKeeper">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=640">
+  <meta property="twitter:image" content="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=640">
+
+
+
+
+
+
+    <title>Hadoop</title>
+
+    <link rel="icon" href="https://hqp1203.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://hqp1203.github.io/post/hadoop/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha512-MLcK/YRapzET1qTBXrOiZE6bGBgtATMo2bIyalVJ8EKDEGNoeA3SPQkvWAR0zNS650YG13ocXBMeioDuZcSRuQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://hqp1203.github.io/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+      
+        <link rel="stylesheet"  href="https://hqp1203.github.io/css/mystyle.css">
+      
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="1">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/" aria-label="去首页">hqp1203のBlog</a>
+  </div>
+  
+    
+      <a class="header-right-icon open-algolia-search"
+         href="/#search" aria-label="打开链接: /#search">
+    
+    
+      <i class="fa fa-lg fa-search"></i>
+    
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="1">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about" aria-label="阅读有关作者的更多信息">
+          <img class="sidebar-profile-picture" src="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Qinpei Huang</h4>
+        
+          <h5 class="sidebar-profile-bio">一个破破烂烂的博客</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/post" title="博客">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">博客</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/21834930/hqp1203" target="_blank" rel="noopener" title="Stack Overflow">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-stack-overflow" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/hqp1203" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="1"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      Hadoop
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2023-05-08T15:37:19&#43;08:00">
+        
+  
+  
+  
+  
+    8 五月 2023
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="/categories/it">IT</a>, 
+    
+      <a class="category-link" href="/categories/bigdata">BigData</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <h1 id="hadoop知识点">Hadoop知识点</h1>
+<p>[TOC]</p>
+<h2 id="font-colorred一-大数据概述font"><!-- raw HTML omitted -->一. 大数据概述<!-- raw HTML omitted --></h2>
+<h3 id="1-简述大数据的内涵">1. 简述大数据的内涵</h3>
+<pre tabindex="0"><code>1. 从对象的角度来看，大数据是数据规模超出传统数据库处理能力的数据集合
+2. 从技术的角度来看，大数据是从海量的数据中快速获得有价值信息的技术
+3. 从应用角度来看，大数据是对特定数据集合应用相关技术获得价值的行为
+4. 从商业角度来看，大数据是企业获得商业价值的业务创新方向
+5. 从思维方式来看，大数据是从第三范式中分离出来的一种科研范式
+</code></pre><h3 id="2-大数据的4-v-特征">2. 大数据的4 V 特征</h3>
+<pre tabindex="0"><code>1. Volume(海量化)：大数据的体量非常大,PB级别是常态，且增长速度较快
+2. Variety(多样化)：大数据种类繁多，一般包括结构化、半结构化、非结构化等几种类型
+3. Velocity(快速化)：数据的快速流动和处理是大数据区分传统数据挖掘的显著特征
+4. Value(价值密度低)：大数据价值密度的高低与数据总量大小成反比，单条数据本身并无太多价值，但庞大的数据量累积并隐藏了巨大的财富，其价值具备稀疏性、多样性和不确定性等特点
+</code></pre><h3 id="3-举例说明大数据的关键技术">3. 举例说明大数据的关键技术</h3>
+<pre tabindex="0"><code>1. 大数据采集技术：
+2. 大数据预处理技术：
+3. 大数据存储和管理技术：
+4. 大数据分析和挖掘技术：
+5. 大数据展现和应用技术：
+</code></pre><h3 id="4-简述大数据云计算5g物联网以及人工智能之间得到区别和联系">4. 简述大数据、云计算、5G、物联网以及人工智能之间得到区别和联系</h3>
+<pre tabindex="0"><code>1）物联网
+a. 物联网从结构体系上可以划分为六个组成部分，分别是设备、网络、平台、分析、应用和安全，其中安全覆盖了其他五个部分。
+b. 物联网是产业互联建设的关键，同时也是人工智能产品的中重要落地应用环境
+
+2）云计算
+a. 云计算的核心是服务，借助互联网为用户提供廉价的计算资源服务。云计算根据用户的不同提供IaaS、PaaS和SaaS三个级别的服务，通过互联网提供动态易扩展的虚拟化资源，计算能力强大
+b. 云计算改变了传统的获取计算资源的方式，成为互联网服务的重要支撑
+
+3）大数据
+a. 大数据指无法在一定时间范围内用常规的软件工具进行捕捉，管理和处理的数据集合，是需要新处理模式才能具有更强的决策力、洞察发现力和流程优化能力的海量、高增长率和多样化的信息资产。
+b. 大数据是物联网、Web和传统信息系统发展的必然结果，它在技术体系与云计算重点都是分布式存储和分布式计算，不同的是云计算注重服务，大数据则注重数据的价值化操作
+
+4）人工智能
+a. 人工智能是研究，开发用于模拟，延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。
+b. 人工智能是大数据、云计算的一个应用场景，包含机器学习，它可以从被动到主动，从模式化实行指令到自主判断根据情况实行不同的指令
+
+5）5G
+a. 5G提供了基础的通信服务支持，在4G的基础之上提升了数据传输速率和容量支持，同时在安全性上也有了一定程度的提升
+b. 5G通信标准带动了物联网、大数据、云计算和人工智能这些产业互联网的发展
+</code></pre><h2 id="二初识hadoop">二、初识Hadoop</h2>
+<h3 id="1-试述hadoop生态系统构成及各个组件的基本功能">1. 试述Hadoop生态系统构成及各个组件的基本功能</h3>
+<pre tabindex="0"><code>1. Hadoop Common是Hadoop体系中最底层的一个模块，用以向其他Hadoop模块提供支持
+
+2. HDFS是Hadoop分布式文件系统，能够以高吞吐量访问应用中的数据
+
+3. YARN是统一资源调度框架，用于作业调度和资源管理
+
+4. MapReduce是一个分布式的、并行处理的编程模型
+
+5. Spark是新一代的计算框架，对迭代计算很有优势，相较与MapReduce性能提升明显，且可以和YARN进行集成
+
+6. HBase是一个分布式的，面向列族的开源数据库，一般采用HDFS作为底层存储，具有强大的非结构化数据存储能力
+
+7. ZooKeeper是分布式的、开源的分布式应用程序协调框架，用以分布式应用的高性能协调服务
+
+8. Hive是一个基于Hadoop的数据仓库工具，可以让不熟悉MapReduce的开发人员直接编写SQL语句，实现对大规模数据的统计分析操作
+
+9. Pig与Hive类似，也是对大型数据集进行分析和评估的工具，不过与Hive提供SQL接口不同的是，它提供了一种高层的、面向领域的抽象语言。和SQL相比，他的语言更加灵活但是学习成本更高
+
+10. Impala提供了与存储在HDFS、HBase上的海量数据进行交互式查询的SQL接口，查询非常迅速。其领先于Hiv的原因是没有基于MapReduce计算框架
+
+11. Mathout是一个机器学习和数据挖掘库，它具有许多功能，包括聚类、分类、推荐和过滤等
+
+12. Flume是一种分布式、可靠以及高可用的海量日志采集、聚合和传输的系统。支持在日志系统中定制各类数据发送方，用于收集数据；同时可提供对数据进行简单处理，并具有写到各种数据接收方（HDFS、Hbase等）的能力
+ 
+13. Sqoop用于关系数据库和Hadoop之间的数据双向交换
+
+14. Kafka是一种高吞吐量、分布式的发布订阅消息系统，可以处理消费者在网站中的所有动作流数据
+
+15. Ambari是一个基于Web的工具，支持Apache集群的安装、配置和管理
+</code></pre><h3 id="2-hadoop的体系架构">2. Hadoop的体系架构</h3>
+<pre tabindex="0"><code>Hadoop集群采用主从架构，NameNode与ResourceManager为Master，DataNode和NodeManager为Slave，守护进程NameNode和DataNode负责完成HDFS工作，守护进程ResourceManager和NodeManager则负责完成Yarn的工作。
+</code></pre><h3 id="3hadoop的运行模式及优缺点">3.Hadoop的运行模式及优缺点</h3>
+<pre tabindex="0"><code>1. 单机模式：只在一个计算机上运行，不需任何配置。在这种情况下，Hadoop所有守护进程都变成了一个Java进程：存储采用本地文件系统，没有采用分布式文件系统HDFS。
+
+2. 伪分布模式：只在一台电脑运行。在这种情况下，Hadoop所有守护进程都运行在一个节点上，在一个节点上模拟了一个具有Hadoop完整功能的微型集群；存储采用分布式文件系统HDFS，但是HDFS的名称节点和数据节点都位于同一台计算机上
+
+3. 全分布模式：在多台计算机上运行。在这种模式下，Hadoop的守护进程运行在多个节点上，形成一个真正意义上的集群；存储采用分布式文件系统HDFS，且HDFS的名称节点和数据节点位于不同的计算机上
+
+优缺点：
+三种运行模式各有优缺点。单机模式配置最简单，但它与用户交互的方式不同于全分布模式；Hadoop在伪分布模式的操作方式与在全分布模式下的操作几乎完全相同；全分布模式是使用Hadoop的最佳方式，现实中Hadoop集群的运行均采用该模式，但它需要的配置工作和架构所需要的机器也都是最多的.
+</code></pre><p><!-- raw HTML omitted -->三种运行模式<!-- raw HTML omitted --></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">模式</th>
+<th style="text-align:right">所需机器数量</th>
+<th style="text-align:right">守护进程</th>
+<th style="text-align:right">是否使用HDFS</th>
+<th style="text-align:right">其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">单机模式</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">所有守护进程变成了一个Java进程</td>
+<td style="text-align:right">使用本地文件系统</td>
+<td style="text-align:right">配置简单</td>
+</tr>
+<tr>
+<td style="text-align:right">伪分布模式</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">所有的守护进程运行在一个节点上</td>
+<td style="text-align:right">采用HDFS</td>
+<td style="text-align:right">NN和DN位于一台计算机上</td>
+</tr>
+<tr>
+<td style="text-align:right">全分布模式</td>
+<td style="text-align:right">多</td>
+<td style="text-align:right">守护进程运行在多个节点上</td>
+<td style="text-align:right">采用HDFS</td>
+<td style="text-align:right">NN和DN位于不同的计算机上</td>
+</tr>
+</tbody>
+</table>
+<p><!-- raw HTML omitted -->优缺点<!-- raw HTML omitted --></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">模式</th>
+<th style="text-align:right">优点</th>
+<th style="text-align:right">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">单机模式</td>
+<td style="text-align:right">配置简单</td>
+<td style="text-align:right">交互方式不同于全分布式</td>
+</tr>
+<tr>
+<td style="text-align:right">伪分布式</td>
+<td style="text-align:right">操作与全分布式基本相同</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:right">全分布式</td>
+<td style="text-align:right">最佳的运行方式，现实中都使用全分布式</td>
+<td style="text-align:right">配置复杂，需要机器多</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三-分布式文件系统hdfs">三. 分布式文件系统HDFS</h2>
+<h3 id="1-简述hdfs的功能及其体系架构">1. 简述HDFS的功能及其体系架构</h3>
+<p>功能</p>
+<pre tabindex="0"><code>HDFS是一个具有高容错的文件系统，适合部署在廉价的的机器上。HDFS能提供高吞吐的数据访问，非常适合大规模数据集上的应用
+</code></pre><p>体系架构</p>
+<pre tabindex="0"><code>HDFS采用Matser/Slave架构模型，一个HDFS集群包括一个NameNode和多个DataNode。名称节点NameNode为主节点，数据节点DataNode为从节点，文件被划分为一系列的数据块存储在从节点DataNode上。NameNode是中心服务器，不存储数据，负责管理文件系统的命名空间以及对客户端文件的访问
+</code></pre><h3 id="2--简述hdfs的数据读取过程">2.  简述HDFS的数据读取过程</h3>
+<pre tabindex="0"><code>1. 客户端连接到NameNode询问某个文件的元数据信息，NameNode返回给客户端一个包含该文件各个块位置信息的列表
+a、客户端生成一个FileSystem实例，并使用此实例的open（）方法打开HDFS上的一个文件
+b、DistributedFileSystem通过RPC向NameNode发出请求，得到文件的位置信息
+c、Fs获得地址信息后，生成一个FSDataInputStream对象返回给客户端，负责存储数据块信息和DataNode地址信息，并负责后续的文件内容读取工作
+
+2. 客户端直接链接对应的DataNode来并行读取块数据
+d、客户端向FSDataInputStream发出读取数据的read（）调用
+e、收到调用后选择最近的DataNode，读取数据返回给客户端，读完关闭
+f、依次选择最近的，读取返回，知道最后一个读完，如果过程中某个失效，自动选择下一个包含此数据最近的DataNode
+
+3. 当客户端得到所有块后，再按照顺序进行组装，得到完整文件
+g、读完后关闭FSDataInputStream
+</code></pre><h3 id="3-简述hdfs的数据写入过程">3. 简述HDFS的数据写入过程</h3>
+<pre tabindex="0"><code>a、创建并初始化FS，客户端调用creat创建
+
+b、FS通过RPC调用NameNode，在其里面创建新文件。判断不存在并且有权限才能创建
+
+c、FS返回DFSOutputStream，客户端开始写入
+
+d、DFSOutputStream将数据分块，写入data queue。data queue由Data Streamer读取，并且通知NameNode分配数据节点，用来存储数据块。分配的数据节点放在一个数据流管道（pipeline）里。DataStreamer将数据写入pipeline第一个节点中，第一个数据节点将数据块发送给第二个数据节点
+
+e、DFSOutputStream为发出去的数据块保存了ack queue，等待pipeline中的数据节点告知写入成功
+
+f、客户端结束写入后调用close函数。此操作将所有的数据块写入pipeline中的数据节点，并且的等待ack queue返回成功
+
+g、通知NameNode写入完毕
+</code></pre><h3 id="4-sconddary-namenode-工作原理是什么">4. Sconddary NameNode 工作原理是什么</h3>
+<pre tabindex="0"><code>1、2NN通知NN切换EditLog文件
+
+2、2NN通过网络从NN下载FsImage和EditLog
+
+3、2NN将FsImage载入内存，合并EditLog
+
+4、2NN将新的FsImage发回给NN
+
+5、NN用新的FsImage替换旧的FsImage
+</code></pre><h3 id="5-namenode-ha环境为了解决什么问题">5. NameNode HA环境（为了解决什么问题）</h3>
+<pre tabindex="0"><code>若NameNode存在单点故障，一旦NameNode进程不能正常工作，就会造成整个HDFS也无法使用。而Hive或HBase等的数据也都存放在HDFS上，因此Hive和HBase等框架也就将无法使用。这可能导致生产集群上许多框架都无妨正常使用，而通过重启NameNode来进行数据恢复十分耗时
+</code></pre><h3 id="6-设置中心节点的优缺点">6. 设置中心节点的优缺点</h3>
+<h2 id="四分布式计算框架mapreduce">四、分布式计算框架MapReduce</h2>
+<h3 id="1-试述mapreduce作业的执行流程">1. 试述MapReduce作业的执行流程</h3>
+<pre tabindex="0"><code>1）InputFormat模块首先对输入数据做预处理，然后将输入文件切分为逻辑上的多个InputSplit；由于InputSplit是逻辑切分而非物理切分，所以还需要通过RecordReader根据InputSplit中的信息来处理InputSplit中的具体记录，加载数据并转换为适合Map任务读取的键值对，输入给Map任务
+
+2）Map模块根据用户自定义的映射规则，输出一系列kv作为中间结果
+
+3）为了让Reduce可以并行处理Map的结果，需要对Map的输出进行一定的排序、分区、合并、归并等操作，得到key list（value）形式的中间结果，再交给对应的reduce处理，这个过程叫做shuffle
+
+4）Reduce以一系列的key list（value）中间结果作为输入，执行用户定义的逻辑，输出k v形式的结果给outputFormat
+
+5）OutputFormat模块会验证输出目录是否已经存在以及输出结果类型是否符合配置文件中的类型，如果都满足，就将Reduce的结果输出到分布式文件系统
+</code></pre><h3 id="2-与java类型比较mapreduce中定义的数据类型有哪些特点">2. 与Java类型比较，MapReduce中定义的数据类型有哪些特点</h3>
+<pre tabindex="0"><code>1）MapReduce是集群运算，因此必然会在执行期间进行网络传输，然而在网络中传输的数据必须是可序列化的类型
+
+2）为了匹配MapReduce内部运行机制，MapReduce专门设计了一套数据类型
+</code></pre><h3 id="3-试述shuffle机制各个阶段的主要作用">3. 试述Shuffle机制各个阶段的主要作用</h3>
+<pre tabindex="0"><code>Collect：持续接收Map阶段输出的数据，写入环形缓冲区
+
+Spill：当环形缓冲区达到阈值时，在进行溢写之前进行一次sort，若配置了combiner，则排序分区和key
+
+Merge：把溢出文件合并，以确保一个MapTask只产生一个中间数据
+
+Copy：ReduceTask启动fetcher线程拷贝MapTask的数据
+
+Merge：合并相同分区的数据
+
+Sort：在进行合并数据的同时进行归并排序
+</code></pre><h2 id="五初识yarn">五、初识YARN</h2>
+<h3 id="1-yarn和mapreduce-10相比的优势">1. Yarn和MapReduce 1.0相比的优势</h3>
+<pre tabindex="0"><code>1. 可扩展性
+当节点数量达到4000时，MapReduce 1.0会遇到可扩展瓶颈。JobTracker无法同时处理如此多的节点。
+Yarn利用RM和AM分离的架构克服了这个缺点，可以扩展到10000个。YARN Federation进一步增强了集群的水平横向扩展性
+
+2. 可用性
+MapReduce 1.0中JobTracker内存中存在大量快速的变化，因此使JobTracker获得HA十分困难。
+RM和AM分别承担了MapReduce 1.0中的JobTracker的功能，实现了RM的高可用就实现了YARN的高可用
+
+3. 利用率
+MapReduce 1.0使用Slot给每个节点分配固定资源，且不允许共享，造成了资源的浪费
+YARN中使用NodeManager管理一个资源池，实现了资源的按需分配
+
+4. 多租户
+YARN最大的优点是可以集成MapReduce以外的分布式计算框架
+</code></pre><h3 id="2-yarn体系架构中三大核心组件的功能">2. YARN体系架构中三大核心组件的功能</h3>
+<pre tabindex="0"><code>1. ResourceManager
+1）处理来自客户端的请求，包括启动终止应用程序
+2）启动监控ApplicationMaster。
+3）监控NodeManager，接收NodeManager汇报的信息并分配任务给NodeManager
+
+2. NodeManager
+1）周期性向ResourceManager汇报本节点的资源使用和Container运行状态
+2）接收并处理来自AM的Container启动停止命令
+
+3. ApplocationMaster
+1）数据切分
+2）为应用程序向ResourceManager申请资源分配给内部任务
+3）与NameNode通信，来启动停止任务
+4）任务监控和容错，在任务失败时重新申请资源和重启任务
+5）接收RM的命令，如终止Container，重启NM
+</code></pre><h3 id="4-试描述yarn-federation出现原因和其实现原理">4. 试描述YARN federation出现原因和其实现原理</h3>
+<pre tabindex="0"><code>解决RM的扩展性问题：
+一个RM管理的节点个数是有限的，因此采用多个RM管理多个集群（同时使用多个集群），同时为了保证单个作业可以无障碍的跨越整个子集群，因此提出了联邦机制。即把所有的子集群划分到一个联邦系统中
+
+原理：
+YARN Federation的主要设计思想是通过联合的方式让集群可以有多个SubCluster。每个SubCluster都是一个独立的小集群，由子集群的RM分别管理一部分节点。这些小集群共同组成一个大的YARN Federation集群，实现资源的统一管理与作业
+</code></pre><h2 id="六">六、</h2>
+<h3 id="1-zookeeper如何保证数据的原子性操作">1. ZooKeeper如何保证数据的原子性操作</h3>
+<pre tabindex="0"><code></code></pre><h3 id="2-zookeeper如何保障数据安全">2. ZooKeeper如何保障数据安全</h3>
+<pre tabindex="0"><code>ZooKeeper通过ACL机制来保证数据安全，一个ACL权限机制可以划分为三个部分
+
+1）ZooKeeper 的权限验证方式大体分为两种类型，一种是范围验证，另外一种是口令验证。
+a. IP 通过IP验证权限
+b. Digest 口令验证权限
+c. World 特殊的Digest，
+d. Super
+
+2）所谓的授权对象就是说我们要把权限赋予谁，而对应于 4 种不同的权限模式来说，如果我们选择采用 IP 方式，使用的授权对象可以是一个 IP 地址或 IP 地址段；而如果使用 Digest 或 Super 方式，则对应于一个用户名。
+
+3）权限就是指我们可以在数据节点上执行的操作种类，在 ZooKeeper 中已经定义好的权限有 5 种：
+
+数据节点（create）创建权限，授予权限的对象可以在数据节点下创建子节点；
+
+数据节点（wirte）更新权限，授予权限的对象可以更新该数据节点；
+
+数据节点（read）读取权限，授予权限的对象可以读取该节点的内容以及子节点的信息；
+
+数据节点（delete）删除权限，授予权限的对象可以删除该数据节点的子节点；
+
+数据节点（admin）管理者权限，授予权限的对象可以对该数据节点体进行 ACL 权限设置。
+</code></pre>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/hadoop/">Hadoop</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/zookeeper/">ZooKeeper</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" data-tooltip="计算机网络" aria-label="下一篇: 计算机网络">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/docker/" data-tooltip="Docker" aria-label="上一篇: Docker">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hqp1203.github.io/post/hadoop/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hqp1203.github.io/post/hadoop/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hqp1203.github.io/post/hadoop/" title="分享到 Google&#43;" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#gitalk" aria-label="发表评论">
+        <i class="fa fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <div id="gitalk">
+      <noscript>Please enable JavaScript to view the comments powered by Gitalk.</noscript>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js" integrity="sha512-EcTCcXV46teiNwe0VcnM5A038tcY+BaQYO4nW6Gh2i7v4/HjBVg7xx3+JBLl9WofDds//INJAiEGAtdgr8PWyA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+      (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+          document.getElementById('gitalk').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+          return;
+        }
+        new Gitalk({
+          clientID: 'f4f67b3e56cb58bac59d',
+          clientSecret: 'c3cf576fa67525b248108e18e368c9492c10ed4c',
+          repo: 'hqp1203.github.io',
+          owner: 'hqp1203',
+          admin: ['hqp1203'],
+          id: '563f7b4e8a6451e90e5144fbe558f31b',
+          ...{"distractionfreemode":false,"enablehotkey":true,"language":"zh-CN","pagerdirection":"first","perpage":10}
+        }).render('gitalk')
+      })()
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2023 Qinpei Huang. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" data-tooltip="计算机网络" aria-label="下一篇: 计算机网络">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="/post/docker/" data-tooltip="Docker" aria-label="上一篇: Docker">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://hqp1203.github.io/post/hadoop/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://hqp1203.github.io/post/hadoop/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://hqp1203.github.io/post/hadoop/" title="分享到 Google&#43;" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#gitalk" aria-label="发表评论">
+        <i class="fa fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="1">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhqp1203.github.io%2Fpost%2Fhadoop%2F" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fhqp1203.github.io%2Fpost%2Fhadoop%2F" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fhqp1203.github.io%2Fpost%2Fhadoop%2F" aria-label="分享到 Google&#43;">
+          <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://cn.gravatar.com/avatar/872968dca6f8051e684e90f8bb15399c" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Qinpei Huang</h4>
+    
+      <div id="about-card-bio">一个破破烂烂的博客</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        在校无业大学生
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://hqp1203.github.io/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://hqp1203.github.io/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha256-LVuWfOU0rWFMCJNl1xb3K2HSWfxtK4IPbqEerP1P83M=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha256-putofyQv7OB569xAldpyBnHJ0Uc+7VGp5Us05IgDGss=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/dockerfile.min.js"></script>
+  
+
+  
+    <script src="https://hqp1203.github.io/js/myscript.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+
