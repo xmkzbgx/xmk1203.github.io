@@ -308,7 +308,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>reduce<span style="color:#f92672">(</span>func<span style="color:#f92672">)</span> <span style="color:#75715e">// 对RDD中的所有元素应用函数func并返回一个结果
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>foreach<span style="color:#f92672">(</span>func<span style="color:#f92672">)</span> <span style="color:#75715e">// 对RDD中的每个元素应用函数func
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>take<span style="color:#f92672">(</span>num<span style="color:#f92672">)</span> <span style="color:#75715e">// 取RDD中前n个数据
-</span></span></span></code></pre></div><h3 id="执行过程">执行过程</h3>
+</span></span></span></code></pre></div><h3 id="rdd执行过程">RDD执行过程</h3>
 <p>具体来说，RDD的计算过程包括以下阶段：</p>
 <ol>
 <li>转换阶段：在这个阶段，Spark将根据转换操作构建依赖关系DAG。</li>
@@ -323,6 +323,49 @@
 <li>持久化可以提高Spark的性能，特别是在多次迭代的机器学习算法中。在这些算法中，每个迭代的计算都需要重复读取和计算数据，如果使用持久化机制，就可以避免这种重复计算，提高计算效率。</li>
 <li>同时，持久化机制还可以增加容错性，因为如果在计算RDD的过程中发生故障，持久化的数据可以被重复使用，从而减少重新计算的时间。</li>
 </ul>
+<h2 id="rdd的属性">RDD的属性</h2>
+<ul>
+<li>分区列表</li>
+<li>计算分区的函数</li>
+<li>RDD之间的依赖关系</li>
+<li>分区器</li>
+<li>数据分区的地址列表</li>
+</ul>
+<h2 id="spark中rdd和df的区别">Spark中RDD和DF的区别</h2>
+<ul>
+<li>数据类型：RDD中的每个元素都是一个Java、Scala或Python对象，而DataFrame是一组列，每个列都有一个数据类型。</li>
+<li>操作：RDD提供了基本的操作（如map、filter、reduce等），这些操作在元素级别上执行。DataFrame提供了更高级别的操作，例如选择、过滤、聚合等，这些操作在列级别上执行。</li>
+<li>性能：DataFrame比RDD更加高效。DataFrame使用了一些优化技术，如列式存储、谓词下推等，这些技术可以加快处理速度。</li>
+<li>编程接口：RDD可以使用Java、Scala或Python进行编程，而DataFrame支持Spark SQL和多种编程语言，如Java、Scala、Python和R等。
+总的来说，如果处理的是非结构化数据，或者需要在数据处理时执行复杂的自定义逻辑，则使用RDD更为合适；如果处理的是结构化数据，则使用DataFrame会更为方便和高效。</li>
+</ul>
+<h2 id="df的创建">DF的创建</h2>
+<ul>
+<li>从文件中创建：可以使用Spark的读取器（如spark.read）读取各种格式的文件，例如CSV、JSON、Parquet等，然后将其转换为DataFrame。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Scala" data-lang="Scala"><span style="display:flex;"><span><span style="color:#75715e">// parquet
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> df <span style="color:#66d9ef">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>load<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;path/to/file.parquet&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 其他文件需要进行一次格式化
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">val</span> df <span style="color:#66d9ef">=</span> spark<span style="color:#f92672">.</span>read<span style="color:#f92672">.</span>format<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;csv&#34;</span><span style="color:#f92672">).</span>load<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;path/to/file.csv&#34;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><ul>
+<li>从RDD中创建：可以使用RDD的toDF()方法将一个RDD转换为DataFrame。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Scala" data-lang="Scala"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> rdd <span style="color:#66d9ef">=</span> sc<span style="color:#f92672">.</span>parallelize<span style="color:#f92672">(</span><span style="color:#a6e22e">Seq</span><span style="color:#f92672">((</span><span style="color:#ae81ff">1</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;John&#34;</span><span style="color:#f92672">),</span> <span style="color:#f92672">(</span><span style="color:#ae81ff">2</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Jane&#34;</span><span style="color:#f92672">),</span> <span style="color:#f92672">(</span><span style="color:#ae81ff">3</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Mike&#34;</span><span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> df <span style="color:#66d9ef">=</span> rdd<span style="color:#f92672">.</span>toDF<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><h2 id="df的常用操作">DF的常用操作</h2>
+<p>select()：选择DataFrame中的一个或多个列。
+filter()：根据某个条件过滤DataFrame的行。
+groupBy()：将DataFrame按照一个或多个列进行分组。
+agg()：对DataFrame进行聚合操作，如求和、平均值等。
+orderBy()：按照一个或多个列对DataFrame进行排序。
+join()：将两个DataFrame根据一个或多个共同的列连接起来。
+distinct()：返回DataFrame中唯一不同的行。
+dropDuplicates()：删除DataFrame中重复的行。
+withColumn()：在DataFrame中添加一个新列。
+drop()：删除DataFrame中的一个或多个列。
+union()：将两个DataFrame中的行合并起来。
+describe()：计算DataFrame中每个数值列的统计摘要。</p>
+<h2 id="什么是流数据">什么是流数据</h2>
               
 
 
