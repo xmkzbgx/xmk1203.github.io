@@ -6,7 +6,25 @@
     <description>Recent content in Posts on hqp1203のBlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 08 May 2023 15:42:55 +0800</lastBuildDate><atom:link href="https://hqp1203.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 May 2023 11:45:52 +0800</lastBuildDate><atom:link href="https://hqp1203.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>商务智能</title>
+      <link>https://hqp1203.github.io/post/%E5%95%86%E5%8A%A1%E6%99%BA%E8%83%BD/</link>
+      <pubDate>Mon, 15 May 2023 11:45:52 +0800</pubDate>
+      
+      <guid>https://hqp1203.github.io/post/%E5%95%86%E5%8A%A1%E6%99%BA%E8%83%BD/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Redis入门</title>
+      <link>https://hqp1203.github.io/post/redis%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sat, 13 May 2023 18:11:06 +0800</pubDate>
+      
+      <guid>https://hqp1203.github.io/post/redis%E5%85%A5%E9%97%A8/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>数据库</title>
       <link>https://hqp1203.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
